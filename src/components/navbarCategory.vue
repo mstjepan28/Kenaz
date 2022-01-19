@@ -12,12 +12,12 @@
 
 export default {
     props:{
-        category: String
+        category: Object
     }
 }
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 @import "@/styles/main.scss";
 
 .category{

@@ -31,24 +31,17 @@
 import NavbarCategory from "./navbarCategory.vue";
 
 export default {
-    component: { NavbarCategory },
-    data() {
-        return {
-            categoryList: [
-                { category: "NEWS", color: "#299EC3", newsList: [] },
-                { category: "BUSINESS", color: "#EE6151", newsList: [] },
-                { category: "SPORT", color: "#84C14F", newsList: [] },
-                { category: "LIFE", color: "#5DCFF3", newsList: [] },
-                { category: "TECH", color: "#FCC44D", newsList: [] },
-                { category: "TRAVEL", color: "#A99765", newsList: [] },
-            ]
-        };
+    props: {
+        categoryList: {
+            type: Object,
+            required: true
+        },
     },
     components: { NavbarCategory }
 }
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 @import "@/styles/main.scss";
 
 .navbar{
