@@ -1,12 +1,12 @@
 <template>
 <div class="home">
 	<main class="home_content">
-		<NewsSection :newsCategory="categoryList[0]"/>
-		<NewsSection :newsCategory="categoryList[2]"/>
+		<NewsSection :newsCategory="categoryList[0]" :contentPlacement="'1x3'"/>
+		<NewsSection :newsCategory="categoryList[2]" :contentPlacement="'1x3'"/>
 
 		<Banner />
 
-		<NewsSection :newsCategory="categoryList[1]"/>
+		<NewsSection :newsCategory="categoryList[1]" :contentPlacement="'2x2'"/>
 		
 		<Banner />
 	</main>

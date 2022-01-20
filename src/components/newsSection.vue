@@ -8,7 +8,20 @@
             <router-link to="/" class="seeAll_link">See all</router-link>
         </div>
 
-        <div class="newsSelection_content">
+        <div v-if="contentPlacement == '1x1'" class="newsSelection_content">
+            <NewsCard/>
+        </div>
+        <div v-else-if="contentPlacement == '2x2'" class="newsSelection_content twoByTwo">
+            <div>
+                <NewsCard :horizontal="true"/>
+                <NewsCard :horizontal="true"/>
+            </div>
+            <div>
+                <NewsCard :horizontal="true"/>
+                <NewsCard :horizontal="true"/>
+            </div>
+        </div>
+        <div v-else class="newsSelection_content">
             <NewsCard/>
             <NewsCard/>
             <NewsCard/>
@@ -25,6 +38,10 @@ export default {
         newsCategory:{
             type: Object,
             required: true
+        },
+        contentPlacement:{ // 1x1 1x3 2x2 
+            type: String,
+            required: false
         }
     },
     components: { NewsCard }
@@ -35,6 +52,8 @@ export default {
 @import "@/styles/main.scss";
 
 .newsSelection{
+    max-width: 620px;
+
     display: flex;
 
     background-color: white;
@@ -64,9 +83,16 @@ export default {
         }
 
         & > .newsSelection_content{
+
             display: flex;
             column-gap: 20px;
             margin: 32px 28px;
+        }
+
+        & > .twoByTwo > div{
+            display: flex;
+            flex-direction: column;
+            row-gap: 32px;
         }
     }
 }

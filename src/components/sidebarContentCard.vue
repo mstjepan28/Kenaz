@@ -38,10 +38,15 @@ export default {
 
     padding: 22px 32px;
 
+    cursor: pointer;
     
     border-bottom: 1px solid rgba(black, 0.2);
     
     background-color: $primary;
+
+    &:hover{
+        background-color: $primary-dark;
+    }
 
     & > .card_description{
         & > .card_description_info{

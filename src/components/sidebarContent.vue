@@ -50,7 +50,7 @@ export default {
     margin-bottom: 28px;
 
     background: $primary;
-
+    
     & > .controls{
         width: 100%;
 
