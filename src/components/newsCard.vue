@@ -3,7 +3,7 @@
     <img class="card_image" src="https://images.unsplash.com/photo-1593642632559-0c6d3fc62b89?ixlib=rb-1.2.1&ixid=MnwxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1769&q=80" alt="">
     
     <div class="card_info">
-        <span class="card_info_date">August 26, 2013</span>
+        <span class="card_info_date">{{formattedDate}}</span>
         <span class="card_info_number">14</span>
     </div>
     
@@ -14,9 +14,15 @@
 </template>
 
 <script>
+import dayjs from "dayjs";
 
 export default {
-
+    computed:{
+        formattedDate(){
+            const date = 1642675620987
+            return dayjs(date).format('MMMM DD, YYYY');
+        }
+    },
 }
 </script>
 

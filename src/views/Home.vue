@@ -12,6 +12,7 @@
 	</main>
 	
 	<aside class="home_sidebar">
+		<SidebarContent/>
 		<SocialMediaSection/>
 	</aside>
 
@@ -24,10 +25,11 @@
 import NewsSection from "@/components/newsSection.vue";
 import Banner from "@/components/banner.vue";
 import SocialMediaSection from "@/components/socialMediaSection.vue";
+import SidebarContent from "@/components/sidebarContent.vue";
 
 export default {
 	name: 'Home',
-	components: { NewsSection, Banner, SocialMediaSection },
+	components: { NewsSection, Banner, SocialMediaSection, SidebarContent },
 	
 	data(){
 		return{
