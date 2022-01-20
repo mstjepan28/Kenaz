@@ -4,7 +4,7 @@
 
     <div class="newsSelection_main">
         <div class="newsSelection_main_heading">
-            <span class="category_title">{{newsCategory.category}}</span>
+            <h2 class="category_title">{{newsCategory.category}}</h2>
             <router-link to="/" class="seeAll_link">See all</router-link>
         </div>
 
@@ -54,20 +54,12 @@ export default {
             padding: 16px 32px 0 32px;
 
             & > .category_title{
-                font-family: Bitter;
-                font-size: 24px;
-                font-weight: 700;
-                line-height: 29px;
+                @include fontStyle($bitter, 24px, bold, 29px, initial);
             }
 
             & > .seeAll_link{
-                font-family: "Varela Round";
-                font-size: 14px;
-                font-weight: 400;
-                line-height: 17px;
+                @include fontStyle($varelaRound, 14px, normal, 17px, $font_color-blue);
                 text-align: right;
-
-                color: $font_color-blue;
             }
         }
 

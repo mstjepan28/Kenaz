@@ -31,12 +31,7 @@ export default {
     border-bottom: 3px solid red;
 
     & > .category_title{
-        font-family: Bitter, sans-serif;
-        font-weight: 700;
-        font-size: 18px;
-        line-height: 21.6px;
-    
-        color: $font_color;
+        @include fontStyle($bitter, 18px, bold, 21px, $font_color);
 
         position: relative;
 

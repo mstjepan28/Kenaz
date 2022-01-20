@@ -72,15 +72,10 @@ export default {
         display: flex;
 
         & > li{
+            @include fontStyle($varelaRound, 14px, normal, 27px, $font_color);
+
             display: flex;
             align-items: center;
-
-            font-family: 'Varela Round', sans-serif;
-            font-style: normal;
-            font-weight: normal;
-            font-size: 14px;
-    
-            color: $font_color;
     
             padding: 12px 8px;
         }
@@ -96,11 +91,7 @@ export default {
         }
 
         & > .title{
-            font-family: Bitter;
-            font-style: normal;
-            font-weight: normal;
-            font-size: 24px;
-            line-height: 27px;
+            @include fontStyle($bitter, 24px, normal, 27px, $font_color);
 
             padding: 16px 8px 8px 8px;
         }

@@ -1,5 +1,5 @@
 <template>
-<div class="carousel" v-if="carouselContent">
+<header class="carousel" v-if="carouselContent">
     <div class="carousel_controls">
         <button class="carousel_controls_left" type="button" @click="changeSlide(-1)">
             <img src="@/assets/svg/largeChevronLeft.svg" alt="left arrow">
@@ -23,7 +23,7 @@
     <div class="carousel_background">
         <img :key="slide.id" :src="slide.imgURL" v-for="slide in carouselContent">
     </div>
-</div>
+</header>
 </template>
 
 <script>
@@ -123,14 +123,6 @@ export default {
 <style lang="scss" scoped>
 @import "@/styles/main.scss";
 
-@mixin fontStyle($font, $size, $weight, $lineHeight, $color){
-    font-family: $font;
-    font-size: $size;
-    font-weight: $weight;
-    line-height: $lineHeight;
-    color: $color;
-}
-
 .carousel{
     width: 100%;
     max-width: $content_width;
@@ -177,7 +169,7 @@ export default {
             column-gap: 24px;
 
             & > span{
-                @include fontStyle("Varela Round", 12px, 400, 14px, $font_color-gray);
+                @include fontStyle($varelaRound, 12px, normal, 14px, $font_color-gray);
 
                 display: flex;
                 align-items: center;
@@ -192,14 +184,14 @@ export default {
         }
 
         & > .carousel_description_title{
-            @include fontStyle("Bitter", 34px, 700, 41px, $font_color-gray);
+            @include fontStyle($bitter, 34px, bold, 41px, $font_color-gray);
             max-width: 65%;
 
             margin: 12px 0;
         }
 
         & > .carousel_description_gotoArticle{
-            @include fontStyle("Varela Round", 14px, normal, 17px, $font_color-gray);
+            @include fontStyle($varelaRound, 14px, normal, 17px, $font_color-gray);
 
             align-self: flex-start;
 

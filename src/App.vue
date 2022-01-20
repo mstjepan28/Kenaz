@@ -1,13 +1,11 @@
 <template>
-	<div class="app">
-		<Navbar :categoryList="categoryList"/>
+	<Navbar :categoryList="categoryList"/>
 
-		<Banner :imgSrc="''"/>
+	<Banner :imgSrc="''"/>
 
-		<NewsCarousel :newsList="newsList"/>
+	<NewsCarousel :newsList="newsList"/>
 
-		<router-view/>
-	</div>
+	<router-view/>
 </template>
 
 <script>
@@ -45,7 +43,7 @@ export default {
 <style lang="scss">
 @import "@/styles/main.scss";
 
-.app{
+#app{
 	width: 100%;
 	min-height: 100vh;
 

@@ -1,15 +1,33 @@
 <template>
-	<main class="main">
+<div class="home">
+	<main class="home_content">
 		<NewsSection :newsCategory="categoryList[0]"/>
+		<NewsSection :newsCategory="categoryList[2]"/>
+
+		<Banner />
+
+		<NewsSection :newsCategory="categoryList[1]"/>
+		
+		<Banner />
 	</main>
+	
+	<aside class="home_sidebar">
+		<SocialMediaSection/>
+	</aside>
+
+</div>
+
+<Banner />
 </template>
 
 <script>
-import NewsSection from "@/components/newsSection.vue"
+import NewsSection from "@/components/newsSection.vue";
+import Banner from "@/components/banner.vue";
+import SocialMediaSection from "@/components/socialMediaSection.vue";
 
 export default {
 	name: 'Home',
-	components: { NewsSection },
+	components: { NewsSection, Banner, SocialMediaSection },
 	
 	data(){
 		return{
@@ -28,8 +46,28 @@ export default {
 
 <style lang="scss" scoped>
 @import "@/styles/main.scss";
-.main{
+.home{
+	width: 100%;
 	max-width: $content_width;
+	
+	display: flex;
+	column-gap: 16px;
+
+
+	& > .home_content{
+		min-width: fit-content;
+
+		& > *{
+			margin-bottom: 16px;
+
+			&:last-child{
+				margin-bottom: 0px 
+			}
+		}
+	}
+	& > .home_sidebar{
+		width: 100%;
+	}
 }
 
 </style>

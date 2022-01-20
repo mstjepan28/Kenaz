@@ -21,6 +21,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import "@/styles/main.scss";
 
 .card{
     max-width: 170px;
@@ -38,18 +39,12 @@ export default {
         margin: 8px 0;
 
         & > *{
-            font-family: "Varela Round";
-            font-size: 12px;
-            font-weight: 400;
-            line-height: 14px;
+            @include fontStyle($varelaRound, 12px, normal, 14px, initial);
         }
     }
 
     & > .card_title{
-        font-family: Bitter;
-        font-size: 14px;
-        font-weight: 700;
-        line-height: 18px;
+        @include fontStyle($bitter, 14px, bold, 18px, initial);
     }
 }
 
