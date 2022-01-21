@@ -1,35 +1,25 @@
 <template>
-<div class="home">
-	<main class="home_content">
-		<NewsSection :newsCategory="categoryList[0]" :contentPlacement="'1x3'"/>
-		<NewsSection :newsCategory="categoryList[2]" :contentPlacement="'1x3'"/>
+<main class="main">
+	<NewsSection :newsCategory="categoryList[0]" :contentPlacement="'1x3'"/>
+	<NewsSection :newsCategory="categoryList[2]" :contentPlacement="'1x3'"/>
 
-		<Banner />
+	<Banner />
 
-		<NewsSection :newsCategory="categoryList[1]" :contentPlacement="'2x2'"/>
-		
-		<Banner />
-	</main>
+	<NewsSection :newsCategory="categoryList[1]" :contentPlacement="'2x2'"/>
 	
-	<aside class="home_sidebar">
-		<SidebarContent/>
-		<SocialMediaSection/>
-	</aside>
+	<Banner />
+</main>
 
-</div>
 
-<Banner />
 </template>
 
 <script>
 import NewsSection from "@/components/newsSection.vue";
 import Banner from "@/components/banner.vue";
-import SocialMediaSection from "@/components/socialMediaSection.vue";
-import SidebarContent from "@/components/sidebarContent.vue";
 
 export default {
 	name: 'Home',
-	components: { NewsSection, Banner, SocialMediaSection, SidebarContent },
+	components: { NewsSection, Banner },
 	
 	data(){
 		return{
@@ -48,27 +38,15 @@ export default {
 
 <style lang="scss" scoped>
 @import "@/styles/main.scss";
-.home{
-	width: 100%;
-	max-width: $content_width;
-	
-	display: flex;
-	column-gap: 16px;
+.main{
+	min-width: fit-content;
 
+	& > *{
+		margin-bottom: 16px;
 
-	& > .home_content{
-		min-width: fit-content;
-
-		& > *{
-			margin-bottom: 16px;
-
-			&:last-child{
-				margin-bottom: 0px 
-			}
+		&:last-child{
+			margin-bottom: 0px 
 		}
-	}
-	& > .home_sidebar{
-		width: 100%;
 	}
 }
 

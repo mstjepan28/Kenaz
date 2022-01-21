@@ -1,7 +1,12 @@
 <template>
-	<div class="banner">
-		<img :src="imgSrc" alt="banner">
-	</div>
+<div class="banner">
+    <span v-if="imgSrc">
+        <img :src="imgSrc" alt="banner">
+    </span>
+    <span v-else>
+        Banner goes here
+    </span>
+</div>
 </template>
 
 <script>
@@ -23,6 +28,10 @@ export default {
     max-width: $content_width;
     height: 120px;
 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
     margin: 16px 0;
 
 	background: #FFFFFF;
@@ -31,6 +40,10 @@ export default {
     img{
         width: 100%;
         height: 100%;
+    }
+
+    span{
+        text-align: center;
     }
 }
 </style>

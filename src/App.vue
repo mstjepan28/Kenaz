@@ -5,7 +5,24 @@
 
 	<NewsCarousel :newsList="newsList"/>
 
-	<router-view/>
+	<div class="app_content">
+		<router-view/>
+
+		<aside class="app_content_sidebar">
+			<SidebarContent/>
+			<SocialMediaSection/>
+			<VideoPlayer :videoLink="'https://www.youtube.com/embed/QhqGCPMfkNM'"/>
+
+			<div class="bannerContainer">
+				<Banner />
+				<Banner />
+			</div>
+		</aside>
+	</div>
+
+	<div class="only-home">
+		<Banner />
+	</div>
 </template>
 
 <script>
@@ -13,8 +30,12 @@ import Navbar from "@/components/navbar.vue";
 import Banner from "./components/banner.vue";
 import NewsCarousel from "./components/newsCarousel.vue";
 
+import SocialMediaSection from "@/components/socialMediaSection.vue";
+import SidebarContent from "@/components/sidebarContent.vue";
+import VideoPlayer from "@/components/videoPlayer.vue";
+
 export default {
-	components: { Navbar, Banner, NewsCarousel },
+	components: { Navbar, Banner, NewsCarousel, SocialMediaSection, SidebarContent, VideoPlayer },
 	data(){
 		return{
 			categoryList: [
@@ -54,4 +75,35 @@ export default {
 	background-color: $background;
 }
 
+.app_content{
+	width: 100%;
+	max-width: $content_width;
+	
+	display: flex;
+	column-gap: 16px;
+
+	& > .app_content_sidebar{
+		& > .bannerContainer{
+			display: flex;
+			justify-content: space-between;
+
+			padding: 20px;
+			margin-top: 16px;
+
+			background-color: $background-darker;
+
+			& > .banner{
+				width: 128px;
+				height: 128px;
+
+				margin: 0;
+			}
+		}
+	}
+}
+
+.only-home{
+	width: 100%;
+	max-width: $content_width;
+}
 </style>

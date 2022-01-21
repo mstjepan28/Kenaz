@@ -116,6 +116,10 @@ export default {
     },
     mounted(){
         this.cloneElements();
+
+        setInterval(() => {
+            this.changeSlide(1);
+        }, 4750);
     },
 }
 </script>

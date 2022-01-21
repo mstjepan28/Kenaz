@@ -1,6 +1,6 @@
 <template>
-<div class="container">
-    <div class="controls">
+<div class="sidebar">
+    <div class="sidebar_controls">
         <label for="popular" :class="{activeType: activeSelection == 'popular'}"> 
             Popular <input type="radio" id="popular" name="contentSelection" value="popular" v-model="activeSelection">
         </label>
@@ -11,7 +11,7 @@
             Comments <input type="radio" id="comments" name="contentSelection" value="comments" v-model="activeSelection">
         </label>
     </div>
-    <div class="content">
+    <div class="sidebar_content">
         <SidebarContentCard />
         <SidebarContentCard />
         <SidebarContentCard />
@@ -40,7 +40,7 @@ export default {
 .activeType{
     color: $highlight-yellow !important;
 }
-.container{
+.sidebar{
     width: 100%;
 
     display: flex;
@@ -51,7 +51,7 @@ export default {
 
     background: $primary;
     
-    & > .controls{
+    & > .sidebar_controls{
         width: 100%;
 
         display: flex;
