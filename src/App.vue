@@ -3,17 +3,19 @@
 		:id="'imgModal'" 
 		ref="imageModal"
 	/>
+
 	<Navbar 
 		:categoryList="categoryList"
 	/>
 
 	<Banner/>
 
-	<Carousel 
-		:id="'newsCarousel'" 
-		:autoplay="true" 
-		:newsList="newsList"
-	/>
+	<header>
+		<Carousel 
+			:id="'newsCarousel'"
+			:newsList="newsList"
+		/>
+	</header>
 
 	<div class="app_content">
 		<router-view/>
@@ -39,10 +41,10 @@
 			:newsList="newsList" 
 			:imagesOnly="true" 
 			@openImgModal="openImgModal"
-
-			style="margin-bottom:500px"
 		/>
 	</div>
+
+	<Footer />
 </template>
 
 <script>
@@ -50,13 +52,14 @@ import Modal from "@/components/modal.vue";
 import Navbar from "@/components/navbar.vue";
 import Banner from "./components/banner.vue";
 import Carousel from "./components/carousel.vue";
+import Footer from "./components/footer.vue";
 
 import SocialMediaSection from "@/components/socialMediaSection.vue";
 import SidebarContent from "@/components/sidebarContent.vue";
 import VideoPlayer from "@/components/videoPlayer.vue";
 
 export default {
-	components: { Modal, Navbar, Banner, Carousel, SocialMediaSection, SidebarContent, VideoPlayer },
+	components: { Modal, Navbar, Banner, Carousel, SocialMediaSection, SidebarContent, VideoPlayer, Footer },
 	data(){
 		return{
 			categoryList: [

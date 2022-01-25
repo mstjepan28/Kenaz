@@ -1,5 +1,5 @@
 <template>
-<header class="carousel" v-if="carouselContent">
+<section class="carousel" v-if="carouselContent">
     <div class="carousel_controls">
         <button class="carousel_controls_left" type="button" @click="changeSlide(-1)">
             <img src="@/assets/svg/largeChevronLeft.svg" alt="left arrow">
@@ -36,7 +36,7 @@
     <div :id="id" class="carousel_background">
         <img :key="slide.id" :src="slide.imgURL" v-for="slide in carouselContent">
     </div>
-</header>
+</section>
 </template>
 
 <script>
