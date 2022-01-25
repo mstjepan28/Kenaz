@@ -1,9 +1,19 @@
 <template>
-	<Navbar :categoryList="categoryList"/>
+	<Modal 
+		:id="'imgModal'" 
+		ref="imageModal"
+	/>
+	<Navbar 
+		:categoryList="categoryList"
+	/>
 
-	<Banner :imgSrc="''"/>
+	<Banner/>
 
-	<NewsCarousel :newsList="newsList"/>
+	<Carousel 
+		:id="'newsCarousel'" 
+		:autoplay="true" 
+		:newsList="newsList"
+	/>
 
 	<div class="app_content">
 		<router-view/>
@@ -11,31 +21,42 @@
 		<aside class="app_content_sidebar">
 			<SidebarContent/>
 			<SocialMediaSection/>
-			<VideoPlayer :videoLink="'https://www.youtube.com/embed/QhqGCPMfkNM'"/>
+			<!--
+			<VideoPlayer :videoLink="'https://www.youtube.com/embed/QhqGCPMfkNM'"/> 
+			-->
 
 			<div class="bannerContainer">
-				<Banner />
-				<Banner />
+				<Banner/>
+				<Banner/>
 			</div>
 		</aside>
 	</div>
 
-	<div class="only-home">
-		<Banner />
+	<div v-if="curRoute == 'Home'" class="only-home">
+		<Banner/>
+		<Carousel 
+			:id="'imageCarousel'" 
+			:newsList="newsList" 
+			:imagesOnly="true" 
+			@openImgModal="openImgModal"
+
+			style="margin-bottom:500px"
+		/>
 	</div>
 </template>
 
 <script>
+import Modal from "@/components/modal.vue";
 import Navbar from "@/components/navbar.vue";
 import Banner from "./components/banner.vue";
-import NewsCarousel from "./components/newsCarousel.vue";
+import Carousel from "./components/carousel.vue";
 
 import SocialMediaSection from "@/components/socialMediaSection.vue";
 import SidebarContent from "@/components/sidebarContent.vue";
 import VideoPlayer from "@/components/videoPlayer.vue";
 
 export default {
-	components: { Navbar, Banner, NewsCarousel, SocialMediaSection, SidebarContent, VideoPlayer },
+	components: { Modal, Navbar, Banner, Carousel, SocialMediaSection, SidebarContent, VideoPlayer },
 	data(){
 		return{
 			categoryList: [
@@ -54,7 +75,18 @@ export default {
 				{id: 4, title: "'4 item Margot' breathlessly reimagines Anne Fran's sister", date: 1642616107134, comments: 24,  imgURL: "https://images.unsplash.com/photo-1642548666500-7990b88e691f?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2778&q=80"},
 				{id: 5, title: "'5 item Margot' breathlessly reimagines Anne Fran's sister", date: 1642616107134, comments: 25,  imgURL: "https://images.unsplash.com/photo-1638913665258-ddd2bceafb30?ixlib=rb-1.2.1&ixid=MnwxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2370&q=80"},
 				{id: 6, title: "'6 item Margot' breathlessly reimagines Anne Fran's sister", date: 1642616107134, comments: 26,  imgURL: "https://images.unsplash.com/photo-1642524859252-448170eb1b11?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2369&q=80"},
+				{id: 7, title: "'7 item Margot' breathlessly reimagines Anne Fran's sister", date: 1642616107134, comments: 27,  imgURL: "https://images.unsplash.com/photo-1643061476185-46e56973b5b5?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1775&q=80"},
 			]
+		}
+	},
+	computed:{
+		curRoute(){
+			return this.$route.name;
+		}
+	},
+	methods:{
+		openImgModal(imgURL){
+			this.$refs.imageModal.openWithImg(imgURL)
 		}
 	}
 }

@@ -4,12 +4,25 @@
         <button class="carousel_controls_left" type="button" @click="changeSlide(-1)">
             <img src="@/assets/svg/largeChevronLeft.svg" alt="left arrow">
         </button>
+
+        <button v-if="imagesOnly" class="carousel_controls_open" type="button" @click="openImage()">
+            <img src="@/assets/search.png" alt="open image">
+        </button>
+
         <button class="carousel_controls_right" type="button" @click="changeSlide(1)">
             <img src="@/assets/svg/largeChevronRight.svg" alt="right arrow">
         </button>
     </div>
 
-    <div class="carousel_description">
+    <div v-if="imagesOnly" class="carousel_preview">
+        <img 
+            class="carousel_preview_img" role="button" 
+            :key="slide.id" :src="slide.imgURL" v-for="slide in carouselContent.slice(0, 7)"
+            @click="openImage(slide.imgURL)"
+        >
+    </div>
+
+    <div v-else class="carousel_description">
         <div class="carousel_description_info">
             <span class="carousel_description_info_date">{{formattedDate}}</span>
             <span class="carousel_description_info_comments"> <img src="@/assets/commentBubble.png" alt="comment bubble">{{carouselContent[selectedIndex].comments}} Comments</span>
@@ -20,7 +33,7 @@
         <button class="carousel_description_gotoArticle">Read article</button>
     </div>
 
-    <div class="carousel_background">
+    <div :id="id" class="carousel_background">
         <img :key="slide.id" :src="slide.imgURL" v-for="slide in carouselContent">
     </div>
 </header>
@@ -31,6 +44,18 @@ import dayjs from 'dayjs';
 
 export default {
     props:{
+        id: {
+            type: String,
+            required: true,
+        },
+        imagesOnly: {
+            type: Boolean,
+            required: false
+        },
+        autoplay: {
+            type: Boolean,
+            required: false
+        },
         newsList:{
             type: Array,
             required: true
@@ -52,6 +77,11 @@ export default {
         }
     },
     methods: {
+        openImage(imgURL=null){
+            imgURL = imgURL? imgURL: this.carouselContent[this.selectedIndex].imgURL;
+            this.$emit("openImgModal", imgURL)
+        },
+
         // Adds/subtracts from the current index and makes sure the index stays in bounds 
         changeSlide(direction){
             if(this.isTransitioning) return;
@@ -73,7 +103,7 @@ export default {
 
         // On button click, change move the carousel
         moveImages(){
-            const carousel = document.querySelector("div.carousel_background");
+            const carousel = document.getElementById(this.id);
             
             this.carouselOffset = this.selectedIndex * -carousel.offsetWidth;
             
@@ -117,9 +147,11 @@ export default {
     mounted(){
         this.cloneElements();
 
-        setInterval(() => {
-            this.changeSlide(1);
-        }, 4750);
+        if(this.autoplay){
+            setInterval(() => {
+                this.changeSlide(1);
+            }, 4750);
+        }
     },
 }
 </script>
@@ -155,6 +187,11 @@ export default {
             cursor: pointer;
             border: none;
             background-color: transparent;
+        }
+
+        & > .carousel_controls_open > img{
+            max-width: 80px;
+            max-height: 80px;
         }
     }
 
@@ -205,6 +242,26 @@ export default {
 
             border: 1px solid #FFFFFF;
             background-color: transparent;
+        }
+    }
+
+    & > .carousel_preview{
+        display: flex;
+        flex-direction: row;
+        column-gap: 10px;
+
+        margin: 20px;
+
+        position: absolute;
+        bottom: 0;
+        z-index: 2;
+
+        & > .carousel_preview_img{
+            $previewImg-size: 120px;
+            width: $previewImg-size;
+            height: $previewImg-size;
+
+            cursor: pointer;
         }
     }
 
