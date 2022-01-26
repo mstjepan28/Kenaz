@@ -1,17 +1,17 @@
 <template>
-<div class="card">
-    <div class="card_description">
-        <div class="card_description_info">
-            <div class="card_description_info_comments">
+<div class="secondaryCard">
+    <div class="secondaryCard_description">
+        <div class="secondaryCard_description_info">
+            <div class="secondaryCard_description_info_comments">
                 <img src="@/assets/commentBubble.png" alt="comment bubble"> 5
             </div>
-            <div class="card_description_info_date">{{formattedDate}}</div>
+            <div class="secondaryCard_description_info_date">{{formattedDate}}</div>
         </div>
 
         <h3>Palestinians call off peace talks after clash</h3>
     </div>
 
-    <div class="card_imgWrapper">
+    <div class="secondaryCard_imgWrapper">
         <img src="https://images.unsplash.com/photo-1638913974071-ad0045d13691?ixlib=rb-1.2.1&ixid=MnwxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2574&q=80" alt="article img">
     </div>
 </div>
@@ -30,10 +30,10 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss" >
 @import "@/styles/main.scss";
 
-.card{
+.secondaryCard{
     display: flex;
 
     padding: 22px 32px;
@@ -41,16 +41,14 @@ export default {
     cursor: pointer;
     
     border-bottom: 1px solid rgba(black, 0.2);
-    
-    background-color: $primary;
 
     &:hover{
-        background-color: $primary-dark;
+        background-color: rgba(black, 0.1);
     }
 
-    & > .card_description{
-        & > .card_description_info{
-            & > .card_description_info_comments{
+    & > .secondaryCard_description{
+        & > .secondaryCard_description_info{
+            & > .secondaryCard_description_info_comments{
                 @include fontStyle($varelaRound, 10px, normal, 12px, $font_color-gray);
     
                 display: flex;
@@ -65,7 +63,7 @@ export default {
                     margin-right: 4px;
                 }
             }
-            & > .card_description_info_date{
+            & > .secondaryCard_description_info_date{
                 @include fontStyle($varelaRound, 10px, normal, 12px, $font_color-gray);
             }
         }
@@ -76,13 +74,14 @@ export default {
         }
     }
 
-    & > .card_imgWrapper{
+    & > .secondaryCard_imgWrapper{
         max-width: 70px;
         max-height: 70px;
 
         & > img{
             width: 100%;
             height: 100%;
+            border: 2px solid white;
         }
     }
 }

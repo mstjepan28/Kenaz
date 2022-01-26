@@ -41,7 +41,63 @@
                 </div>
             </div>
         </div>
-        <div class="footer_content_news"></div>
+
+        <div class="footer_content_news">
+            <div class="featured">
+                <h2>Featured</h2>
+                <div>
+                    <NewsCard/>
+                    <NewsCard/>
+                    <NewsCard/>
+                </div>
+            </div>
+            <div class="randomPost">
+                <h2>Random Posts</h2>
+                <div class="randomPost_container">
+                    <NewsCard/>
+                    <NewsCard/>
+                    <NewsCard/>
+                </div>
+            </div>
+            <div class="twitterFeed">
+                <h2>Twitter Feed</h2>
+                <div>
+
+                    <div class="tweet">
+                        <div class="user">
+                            <img src="@/assets/svg/twitterLogo.svg" alt="Twitter logo">
+                            <span class="user_name">Envato</span>
+                            <span class="user_userName">@envato</span>
+                        </div>
+                        <p>
+                            Is this your typical million dollar day in the park? http://enva.to/150vxFC  Happy @TrueThemes Day! #ThemeForest pic.twitter.com/EHz7awxOXy
+                        </p>
+                    </div>
+                    <div class="tweet">
+                        <div class="user">
+                            <img src="@/assets/svg/twitterLogo.svg" alt="Twitter logo">
+                            <span class="user_name">Envato</span>
+                            <span class="user_userName">@envato</span>
+                        </div>
+                        <p>
+                            Happy TrueThemes Day http://enva.to/1dRzgLD 
+                        </p>
+                    </div>
+                    <div class="tweet">
+                        <div class="user">
+                            <img src="@/assets/svg/twitterLogo.svg" alt="Twitter logo">
+                            <span class="user_name">Envato</span>
+                            <span class="user_userName">@envato</span>
+                        </div>
+                        <p>
+                            @robscri I would really want to look into what's taking so long. Thank you ever so much! ^TC
+                        </p>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
     </div>
     
     <div class="footer_misc">
@@ -57,8 +113,10 @@
 </template>
 
 <script>
+import NewsCard from "@/components/sidebarContentCard.vue";
 
 export default {
+    components: { NewsCard },
     data(){
         return{
             tagList: ["Lorem", "ipsum", "dolor", "sit", "amet", "consectetur", "adipisicing", "elit", "Voluptatum", "dolor", "voluptatibus", "beatae", "error"]
@@ -94,7 +152,7 @@ export default {
         max-width: $content_width;
 
         display: flex;
-        justify-content: center;
+        flex-direction: column;
 
         padding: 56px 0 68px 0;
 
@@ -110,6 +168,10 @@ export default {
 
             & h2{
                 @include fontStyle($bitter, 24px, bold, 29px, #CCCCCC);
+                min-height: 52px;
+
+                display: flex;
+                align-items: center
             }
             & p{
                 @include fontStyle($bitter, 14px, normal, 20px, #666666);
@@ -167,14 +229,11 @@ export default {
             }
 
             & > .tags{
-
-                h2{
-                    margin-bottom: 36px;
-                }
-
                 & > .tags_container{
                     display: flex;
-                    flex-wrap: wrap
+                    flex-wrap: wrap;
+
+                    padding-top: 24px;
                 }
 
                 & .tag{
@@ -191,6 +250,53 @@ export default {
                         cursor: pointer;
                         background-color: $primary;
                     }
+                }
+            }
+        }
+
+        & > .footer_content_news{
+            width: 100%;
+
+            display: flex;
+            column-gap: 20px;
+
+            margin-top: 68px;
+            
+            & > *{
+                width: 33%;
+            }
+
+            h2{
+                @include fontStyle($bitter, 24px, bold, 29px, white);
+            }
+
+            & .secondaryCard{
+                border-bottom: 1px solid #666666;
+            }
+
+            & > .twitterFeed{
+                & .tweet{
+                    padding: 20px 0;
+
+                    p{
+                        @include fontStyle($varelaRound, 13px, normal, 18px, #CCCCCC);
+                    }
+
+                    & > .user{
+                        display: flex;
+                        align-items: center;
+
+                        margin-bottom: 12px;
+
+                        .user_name{
+                            @include fontStyle($bitter, 14px, normal, 16px, #666666);
+                            margin: 0 4px;
+                        }
+                        .user_userName{
+                            @include fontStyle($varelaRound, 14px, normal, 16px, #666666);
+                        }
+                    }
+
                 }
             }
         }
