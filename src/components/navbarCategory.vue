@@ -82,15 +82,15 @@ export default {
     &.active{
         border-bottom-width: 0;
         & > .category_background{
-            animation: moveUp 0.4s forwards;
+            top: 0px;
         }
     }
 
-    &:hover{
+    &:not(.active):hover{
         animation: removeBorder 0.4s forwards;
 
         & > .category_background{
-            top: 0px;
+            animation: moveUp 0.4s forwards;
         }
     }
 
