@@ -34,15 +34,19 @@
 		</aside>
 	</div>
 
-	<div v-if="curRoute == 'Home'" class="only-home">
-		<Banner/>
-		<Carousel 
-			:id="'imageCarousel'" 
-			:newsList="newsList" 
-			:imagesOnly="true" 
-			@openImgModal="openImgModal"
-		/>
-	</div>
+	<Banner 
+		v-if="curRoute == 'Home' || curRoute == 'Category'"
+		class="only-home"
+	/>
+	<Carousel
+		v-if="curRoute == 'Home'"
+		class="only-home"
+
+		:id="'imageCarousel'" 
+		:newsList="newsList" 
+		:imagesOnly="true" 
+		@openImgModal="openImgModal"
+	/>
 
 	<Footer />
 </template>

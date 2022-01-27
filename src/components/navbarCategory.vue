@@ -36,11 +36,15 @@ export default {
         }
     },
     methods: {
-        gotoCategory(nextCategory){
-            this.$router.push({ 
-                name: 'Category', 
-                params: { id: nextCategory.toLowerCase() } 
-            })
+        gotoCategory(categoryId){
+            let newRoute;
+
+            if(categoryId == "NEWS") 
+                newRoute = { name: 'Home' }
+            else 
+                newRoute = { name: 'Category', params: { id: categoryId.toLowerCase() } }
+            
+            this.$router.push(newRoute)
         }
     },
 }
