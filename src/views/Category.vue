@@ -1,5 +1,6 @@
 <template>
 <main class="main">
+	<h2 class="categoryTitle">{{curCategory}}</h2>
 	<CategoryNewsCard :key="news.id" :news="news" v-for="news in curPageContent"/>
 	<Pagination :totalPages="totalPages" @changePage="setPage"/>
 </main>
@@ -44,6 +45,10 @@ export default {
 		},
 		totalPages(){
 			return Math.ceil(this.newsList.length / this.itemPerPage);
+		},
+		curCategory(){
+			const curCategory = this.$route.params.id;
+			return curCategory.charAt(0).toUpperCase() + curCategory.slice(1);
 		}
 	},
 	methods: {
@@ -59,12 +64,14 @@ export default {
 .main{
 	min-width: fit-content;
 
-	& > *{
-		margin-bottom: 16px;
+	display: flex;
+	flex-direction: column;
 
-		&:last-child{
-			margin-bottom: 0px 
-		}
+	background-color: white;
+
+	& > .categoryTitle{
+		@include fontStyle($bitter, 24px, bold, 28px, #363F48);
+		padding: 16px 0 0 32px;
 	}
 }
 

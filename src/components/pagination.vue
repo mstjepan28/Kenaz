@@ -49,10 +49,12 @@ export default {
     width: 100%;
 
     display: flex;
-    justify-content: center;
     align-items: center;
 
     column-gap: 4px;
+
+    padding: 32px;
+    margin-top: auto;
 
     & > .pagination_pageNum{
         @include fontStyle($varelaRound, 14px, normal, 17px, $primary);

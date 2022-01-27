@@ -3,10 +3,14 @@
 
         <div class="navbar_top_wrapper">
             <ul class="navbar_top_content">
-                <li class="wrapper_logo">
-                    <img src="@\assets\logo_white.png" alt="Kenaz logo">
+                <li>
+                    <router-link to="/" class="container_logo">
+                        <span class="logo">
+                            <img src="@\assets\logo_white.png" alt="Kenaz logo">
+                        </span>
+                        <span class="title">Kenaz</span> 
+                    </router-link>
                 </li>
-                <li class="title">Kenaz</li> 
 
                 <li class="break_element">Media</li> 
                 <li>Marketing</li> 
@@ -62,7 +66,6 @@ export default {
     list-style-type: none;
 
     display: flex;
-
 }
 
 .navbar_top_wrapper{
@@ -78,23 +81,39 @@ export default {
             align-items: center;
     
             padding: 12px 8px;
-        }
 
-        & > .wrapper_logo{
-            padding: 16px 24px;
-            background-color: $secondary-light; 
-
-            & > img{
-                width: 14px;
-                height: 21px;
+            &:first-child{
+                padding: 0;
             }
         }
 
-        & > .title{
-            @include fontStyle($bitter, 24px, normal, 27px, $font_color);
+        & .container_logo{
+            display: flex;
+            align-self: stretch;
+            align-items: center;
+            
+            & > .logo{
+                display: flex;
+                align-self: stretch;
+                align-items: center;
 
-            padding: 16px 8px 8px 8px;
+                padding: 0 24px;
+
+                background-color: $secondary-light; 
+    
+                & > img{
+                    width: 14px;
+                    height: 21px;
+                }
+            }
+    
+            & > .title{
+                @include fontStyle($bitter, 24px, normal, 27px, $font_color);
+                align-self: flex-start;
+                padding: 16px 0 0 8px;
+            }
         }
+
 
         & > .break_element{
             margin-left: auto;
