@@ -1,5 +1,12 @@
 <template>
-    <li class="category" :style="`border-bottom: 3px solid ${category.color}`">
+    <li 
+        class="category" 
+        :class="{active: isCurCategory}"
+        :style="`border-bottom: 3px solid ${category.color}`" 
+        role="button" 
+        @click="gotoCategory(category.category)"
+        
+    >
         <span class="category_title">{{category.category}}</span>
         <div 
             class="category_background" 
@@ -13,7 +20,29 @@
 export default {
     props:{
         category: Object
-    }
+    },
+    computed:{
+        isCurCategory(){
+            const route = this.$route.name;
+            const categoryId = this.$route.params.id;
+            const curCategory = this.category.category.toLowerCase();
+
+            if(route != "Category" && curCategory == "news")
+                return true;
+            else if(categoryId == curCategory)
+                return true;
+            else
+                return false; 
+        }
+    },
+    methods: {
+        gotoCategory(nextCategory){
+            this.$router.push({ 
+                name: 'Category', 
+                params: { id: nextCategory.toLowerCase() } 
+            })
+        }
+    },
 }
 </script>
 
@@ -50,11 +79,18 @@ export default {
         z-index: 1;
     }
 
+    &.active{
+        border-bottom-width: 0;
+        & > .category_background{
+            animation: moveUp 0.4s forwards;
+        }
+    }
+
     &:hover{
         animation: removeBorder 0.4s forwards;
 
         & > .category_background{
-            animation: moveUp 0.4s forwards;
+            top: 0px;
         }
     }
 

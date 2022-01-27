@@ -91,7 +91,7 @@ export default {
 		openImgModal(imgURL){
 			this.$refs.imageModal.openWithImg(imgURL)
 		}
-	}
+	},
 }
 
 </script>

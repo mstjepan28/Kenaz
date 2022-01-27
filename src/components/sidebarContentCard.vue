@@ -36,7 +36,7 @@ export default {
 .secondaryCard{
     display: flex;
 
-    padding: 22px 32px;
+    padding: 22px 32px !important;
 
     cursor: pointer;
     
