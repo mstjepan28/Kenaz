@@ -7,7 +7,7 @@
         @click="gotoCategory(category.category)"
         
     >
-        <span class="category_title">{{category.category}}</span>
+        <span class="category_title">{{upperCaseCategory}}</span>
         <div 
             class="category_background" 
             :style="`background-color: ${category.color}`"
@@ -33,6 +33,11 @@ export default {
                 return true;
             else
                 return false; 
+        }
+    },
+    computed:{
+        upperCaseCategory(){
+            return this.category.category.toUpperCase();
         }
     },
     methods: {

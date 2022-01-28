@@ -1,5 +1,5 @@
 <template>
-<main class="main">
+<main v-if="categoryList" class="main">
 	<NewsSection :newsCategory="categoryList[0]" :contentPlacement="'1x3'"/>
 	<NewsSection :newsCategory="categoryList[2]" :contentPlacement="'1x3'"/>
 
@@ -23,15 +23,12 @@ export default {
 	
 	data(){
 		return{
-			categoryList: [
-                { category: "NEWS", color: "#299EC3", newsList: [] },
-                { category: "BUSINESS", color: "#EE6151", newsList: [] },
-                { category: "SPORT", color: "#84C14F", newsList: [] },
-                { category: "LIFE", color: "#5DCFF3", newsList: [] },
-                { category: "TECH", color: "#FCC44D", newsList: [] },
-                { category: "TRAVEL", color: "#A99765", newsList: [] },
-            ]
+			categoryList: null
 		}
+	},
+	mounted(){
+		this.$store.dispatch('fetchCategoryList');
+		this.categoryList = this.$store.state.categoryList;
 	}
 }
 </script>

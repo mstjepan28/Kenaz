@@ -4,8 +4,8 @@
 
     <div class="newsSelection_main">
         <div class="newsSelection_main_heading">
-            <h2 class="category_title">{{newsCategory.category}}</h2>
-            <router-link to="/" class="seeAll_link">See all</router-link>
+            <h2 class="category_title">{{upperCaseCategory}}</h2>
+            <router-link :to="`/category/${newsCategory.category}`" class="seeAll_link">See all</router-link>
         </div>
 
         <div v-if="contentPlacement == '1x1'" class="newsSelection_content">
@@ -27,7 +27,6 @@
             <NewsCard/>
         </div>
     </div>
-
 </div>
 </template>
 
@@ -44,7 +43,12 @@ export default {
             required: false
         }
     },
-    components: { NewsCard }
+    components: { NewsCard },
+    computed:{
+        upperCaseCategory(){
+            return this.newsCategory.category.toUpperCase();
+        }
+    }
 }
 </script>
 
