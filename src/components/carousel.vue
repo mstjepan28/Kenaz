@@ -56,7 +56,7 @@ export default {
             type: Boolean,
             required: false
         },
-        newsList:{
+        articleList:{
             type: Array,
             required: true
         }
@@ -138,10 +138,10 @@ export default {
         // Clones the first and last element to the opposite place in the list so 
         // we can create the infinite effect
         cloneElements(){
-            const firstElem = this.newsList[0];
-            const lastElem = this.newsList[this.newsList.length - 1];
+            const firstElem = this.articleList[0];
+            const lastElem = this.articleList[this.articleList.length - 1];
 
-            this.carouselContent = [lastElem, ...this.newsList, firstElem];
+            this.carouselContent = [lastElem, ...this.articleList, firstElem];
         }
     },
     mounted(){

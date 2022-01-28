@@ -1,5 +1,5 @@
 <template>
-<main v-if="newsList" class="main">
+<main v-if="articleList" class="main">
 	<h2 class="categoryTitle">{{curCategory}}</h2>
 	<CategoryNewsCard :key="news.id" :news="news" v-for="news in curPageContent"/>
 	<Pagination :totalPages="totalPages" @changePage="setPage"/>
@@ -16,7 +16,7 @@ export default {
 	
 	data(){
 		return{
-			newsList: null,
+			articleList: null,
 
 			page: 1,
 			itemPerPage: 6
@@ -27,10 +27,10 @@ export default {
 			const end = this.page * this.itemPerPage; 
 			const start = end - this.itemPerPage;
 			
-			return this.newsList.slice(start, end);
+			return this.articleList.slice(start, end);
 		},
 		totalPages(){
-			return Math.ceil(this.newsList.length / this.itemPerPage);
+			return Math.ceil(this.articleList.length / this.itemPerPage);
 		},
 		curCategory(){
 			const curCategory = this.$route.params.id;
@@ -43,7 +43,7 @@ export default {
 		}
 	},
 	mounted(){
-		this.newsList = this.$store.state.newsList
+		this.articleList = this.$store.state.articleList
 	}
 }
 </script>

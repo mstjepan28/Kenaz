@@ -7,10 +7,10 @@
             <img src="" alt="">{{formattedDate}}
         </span>
         <span class="categoryNewsCard_info_author">
-            Autor: {{news.author}}
+            Author: {{author}}
         </span>
         <span class="categoryNewsCard_info_comments">
-            {{news.comments}} comments
+            {{numOfComments}} comments
         </span>
     </div>
 
@@ -47,15 +47,24 @@ export default {
     },
     data(){
         return{
-
+            author: null
         }
     },
     computed:{
+        numOfComments(){
+            return this.news.commentIds.length
+        },
         formattedDate(){
-            const date = this.news.date;
+            const date = this.news.date * 1000;
             return dayjs(date).format('MMMM DD, YYYY');
         }
     },
+    mounted(){
+        if(!this.$store.state.authorList) 
+            this.$store.dispatch('fetchAuthorList')
+        
+        this.author = this.$store.getters.getAuthorById(this.news.authorId).name
+    }
 }
 </script>
 

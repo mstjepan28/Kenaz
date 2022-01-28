@@ -1,33 +1,41 @@
-import data from "../assets/data";
+import mockData from "../assets/mockData";
 
 export default {
     state () {
         return {
-            categoryList: [],
-            newsList: []
+            categoryList: null,
+            articleList: null,
+            authorList: null
         }
     },
     getters: {
-        getCategoryList(state){
-            return state.categoryList
+        getAuthorById: (state, getters) => (authorId) => {
+            return state.authorList.filter(author => author.id == authorId)[0]
         }
     },
     mutations: {
         setCategoryList(state, categoryList){
             state.categoryList = categoryList;
         },
-        setNewsList(state, newsList){
-            state.newsList = newsList;
-        }
+        setArticleList(state, articleList){
+            state.articleList = articleList;
+        },
+        setAuthorList(state, authorList){
+            state.authorList = authorList;
+        },
     },
     actions: {
         fetchCategoryList({ commit }){
-            const categoryList = data.categoryList;
+            const categoryList = mockData.categoryList;
             commit('setCategoryList', categoryList);
         },
-        fetchNewsList({ commit }){ 
-            const newsList = data.newsList;
-            commit('setNewsList', newsList);
+        fetchArticleList({ commit }){ 
+            const articleList = mockData.articles;
+            commit('setArticleList', articleList);
+        },
+        fetchAuthorList({ commit }){ 
+            const authorList = mockData.authors;
+            commit('setAuthorList', authorList);
         }
     }
 }

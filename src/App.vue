@@ -13,9 +13,9 @@
 
 	<header>
 		<Carousel
-			v-if="newsList"
+			v-if="articleList"
 			:id="'newsCarousel'"
-			:newsList="newsList"
+			:articleList="articleList.slice(0, 7)"
 		/>
 	</header>
 
@@ -41,15 +41,15 @@
 		class="only-home"
 	/>
 	<Carousel
-		v-if="curRoute == 'Home' && newsList"
+		v-if="curRoute == 'Home' && articleList"
 		class="only-home"
 
 		:id="'imageCarousel'" 
-		:newsList="newsList" 
+		:articleList="articleList.slice(0, 7)" 
 		:imagesOnly="true" 
 		@openImgModal="openImgModal"
 	/>
-
+	
 	<Footer />
 </template>
 
@@ -69,7 +69,7 @@ export default {
 	data(){
 		return{
 			categoryList: null,
-			newsList: null,
+			articleList: null,
 		}
 	},
 	computed:{
@@ -86,8 +86,8 @@ export default {
 		this.$store.dispatch('fetchCategoryList');
 		this.categoryList = this.$store.state.categoryList; 
 
-		this.$store.dispatch('fetchNewsList');
-		this.newsList = this.$store.state.newsList; 
+		this.$store.dispatch('fetchArticleList');
+		this.articleList = this.$store.state.articleList; 
 	}
 }
 
