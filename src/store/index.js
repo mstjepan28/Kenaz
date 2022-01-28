@@ -1,4 +1,4 @@
-import mockData from "../assets/mockData";
+import mockData from "../assets/data/mockData";
 
 export default {
     state () {

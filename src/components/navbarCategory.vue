@@ -33,9 +33,7 @@ export default {
                 return true;
             else
                 return false; 
-        }
-    },
-    computed:{
+        },
         upperCaseCategory(){
             return this.category.category.toUpperCase();
         }
