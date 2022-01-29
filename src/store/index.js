@@ -11,7 +11,15 @@ export default {
     getters: {
         getAuthorById: (state, getters) => (authorId) => {
             return state.authorList.filter(author => author.id == authorId)[0]
-        }
+        },
+        getArticlesByCategory: (state, getters) => (category) => {
+            category = category.toLowerCase();
+            return state.articleList.filter(article => article.category == category)
+        },
+        getArticles: (state, getters) => (quantity) => {
+            if(!state.articleList) return null;
+            return state.articleList.slice(0, quantity);
+        },
     },
     mutations: {
         setCategoryList(state, categoryList){

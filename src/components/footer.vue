@@ -45,18 +45,22 @@
         <div class="footer_content_news">
             <div class="featured">
                 <h2>Featured</h2>
-                <div>
-                    <NewsCard/>
-                    <NewsCard/>
-                    <NewsCard/>
+                <div v-if="articleList">
+                    <NewsCard 
+                        :key="article.id" 
+                        :article="article" 
+                        v-for="article in articleList.slice(0, 3)"
+                    />
                 </div>
             </div>
             <div class="randomPost">
                 <h2>Random Posts</h2>
-                <div class="randomPost_container">
-                    <NewsCard/>
-                    <NewsCard/>
-                    <NewsCard/>
+                <div v-if="articleList" class="randomPost_container">
+                    <NewsCard 
+                        :key="article.id" 
+                        :article="article" 
+                        v-for="article in articleList.slice(3, 6)"
+                    />
                 </div>
             </div>
             <div class="twitterFeed">
@@ -119,10 +123,18 @@ export default {
     components: { NewsCard },
     data(){
         return{
-            tagList: ["Lorem", "ipsum", "dolor", "sit", "amet", "consectetur", "adipisicing", "elit", "Voluptatum", "dolor", "voluptatibus", "beatae", "error"]
+            tagList: ["Lorem", "ipsum", "dolor", "sit", "amet", "consectetur", "adipisicing", "elit", "Voluptatum", "dolor", "voluptatibus", "beatae", "error"],
+            articleList: null,
         }
-    }
+    },
+    mounted(){
+        this.articleList = this.$store.getters.getArticles(6);
 
+        if(!this.articleList){
+            this.$store.dispatch("fetchArticleList")
+            this.articleList = this.$store.getters.getArticles(6);	
+        }    
+    }
 }
 
 </script>

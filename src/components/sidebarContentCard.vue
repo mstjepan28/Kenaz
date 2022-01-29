@@ -1,18 +1,18 @@
 <template>
-<div class="secondaryCard">
+<div v-if="article" class="secondaryCard">
     <div class="secondaryCard_description">
         <div class="secondaryCard_description_info">
             <div class="secondaryCard_description_info_comments">
-                <img src="@/assets/commentBubble.png" alt="comment bubble"> 5
+                <img src="@/assets/commentBubble.png" alt="comment bubble"> {{numOfComments}}
             </div>
             <div class="secondaryCard_description_info_date">{{formattedDate}}</div>
         </div>
 
-        <h3>Palestinians call off peace talks after clash</h3>
+        <h3>{{article.title}}</h3>
     </div>
 
     <div class="secondaryCard_imgWrapper">
-        <img src="https://images.unsplash.com/photo-1638913974071-ad0045d13691?ixlib=rb-1.2.1&ixid=MnwxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2574&q=80" alt="article img">
+        <img :src="article.imgURL" alt="article img">
     </div>
 </div>
 </template>
@@ -21,11 +21,20 @@
 import dayjs from "dayjs";
 
 export default {
+    props:{
+        article:{
+            type: Object,
+            required: false,
+        }
+    },
     computed:{
         formattedDate(){
-            const date = 1642675620987;
+            const date = this.article.date * 1000;
             return dayjs(date).format('MMMM DD, YYYY');
-        }
+        },
+        numOfComments(){
+            return this.article.commentIds.length
+        },
     },
 }
 </script>

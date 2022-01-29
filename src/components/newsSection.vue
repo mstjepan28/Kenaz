@@ -1,33 +1,31 @@
 <template>
-<div class="newsSelection">
+<section class="newsSelection">
     <div class="newsSelection_sidebar" :style="`background-color: ${newsCategory.color}`"></div>
 
-    <div class="newsSelection_main">
+    <div v-if="articleList" class="newsSelection_main">
         <div class="newsSelection_main_heading">
             <h2 class="category_title">{{upperCaseCategory}}</h2>
             <router-link :to="`/category/${newsCategory.category}`" class="seeAll_link">See all</router-link>
         </div>
 
         <div v-if="contentPlacement == '1x1'" class="newsSelection_content">
-            <NewsCard/>
+            <NewsCard :article="articleList[0]"/>
         </div>
         <div v-else-if="contentPlacement == '2x2'" class="newsSelection_content twoByTwo">
             <div>
-                <NewsCard :horizontal="true"/>
-                <NewsCard :horizontal="true"/>
+                <NewsCard :article="articleList[0]" :horizontal="true"/>
+                <NewsCard :article="articleList[1]" :horizontal="true"/>
             </div>
             <div>
-                <NewsCard :horizontal="true"/>
-                <NewsCard :horizontal="true"/>
+                <NewsCard :article="articleList[2]" :horizontal="true"/>
+                <NewsCard :article="articleList[3]" :horizontal="true"/>
             </div>
         </div>
         <div v-else class="newsSelection_content">
-            <NewsCard/>
-            <NewsCard/>
-            <NewsCard/>
+            <NewsCard :key="article.id" :article="article" v-for="article in articleList.slice(0, 3)"/>
         </div>
     </div>
-</div>
+</section>
 </template>
 
 <script>
@@ -44,10 +42,19 @@ export default {
         }
     },
     components: { NewsCard },
+    data(){
+        return{
+            articleList: null
+        }
+    },
     computed:{
         upperCaseCategory(){
             return this.newsCategory.category.toUpperCase();
         }
+    },
+    mounted(){
+        const category = this.newsCategory.category
+        this.articleList = this.$store.getters.getArticlesByCategory(category).slice(0, 4);	
     }
 }
 </script>

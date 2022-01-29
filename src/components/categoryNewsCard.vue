@@ -19,15 +19,7 @@
             <img :src="news.imgURL" alt="">
         </div>
         <div class="categoryNewsCard_content_text">
-            <p>
-                Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed 
-                diam nonummy nibh euismod tincidunt ut laoreet dolore magna 
-                aliquam erat volutpat. Ut wisi enim ad minim veniam, quis 
-                nostrud exerci tation ullamcorper suscipit lobortis nisl ut 
-                aliquip ex ea commodo consequat. Ut wisi enim ad minim veniam, 
-                quis nostrud exerci tation ullamcorper suscipit lobortis nisl 
-                ut aliquip ex ea commodo. 
-            </p>
+            <p>{{shortContent}}</p>
 
             <button class="readArticle">Read article</button>
         </div>
@@ -57,6 +49,9 @@ export default {
         formattedDate(){
             const date = this.news.date * 1000;
             return dayjs(date).format('MMMM DD, YYYY');
+        },
+        shortContent(){
+            return this.news.content.slice(0, 500) + "...";
         }
     },
     mounted(){

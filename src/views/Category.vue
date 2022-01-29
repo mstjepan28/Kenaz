@@ -2,7 +2,7 @@
 <main v-if="articleList" class="main">
 	<h2 class="categoryTitle">{{curCategory}}</h2>
 	<CategoryNewsCard :key="news.id" :news="news" v-for="news in curPageContent"/>
-	<Pagination :totalPages="totalPages" @changePage="setPage"/>
+	<Pagination :totalPages="totalPages" ref="pagination" @changePage="setPage"/>
 </main>
 </template>
 
@@ -34,16 +34,28 @@ export default {
 		},
 		curCategory(){
 			const curCategory = this.$route.params.id;
+			if(!curCategory) return "";
+
 			return curCategory.charAt(0).toUpperCase() + curCategory.slice(1);
 		}
 	},
 	methods: {
 		setPage(newPage){
 			this.page = newPage;
+		},
+		setCategoryContent(){
+			this.page = 1;
+			this.$refs.pagination?.setPage(this.page);
+			this.articleList = this.$store.getters.getArticlesByCategory(this.curCategory);	
 		}
 	},
 	mounted(){
-		this.articleList = this.$store.state.articleList
+		this.setCategoryContent();
+	},
+	watch:{
+		curCategory(){
+			this.setCategoryContent();
+		}
 	}
 }
 </script>

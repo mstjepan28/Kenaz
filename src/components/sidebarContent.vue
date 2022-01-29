@@ -11,12 +11,12 @@
             Comments <input type="radio" id="comments" name="contentSelection" value="comments" v-model="activeSelection">
         </label>
     </div>
-    <div class="sidebar_content">
-        <SidebarContentCard />
-        <SidebarContentCard />
-        <SidebarContentCard />
-        <SidebarContentCard />
-        <SidebarContentCard />
+    <div v-if="articleList" class="sidebar_content">
+        <SidebarContentCard 
+            :key="article.id" 
+            :article="article" 
+            v-for="article in articleList.slice(0, 4)"
+        />
     </div>
 </div>
 </template>
@@ -29,7 +29,16 @@ export default {
     data(){
         return{
             activeSelection: "popular",
+            articleList: null,
         }
+    },
+    mounted(){
+        this.articleList = this.$store.getters.getArticles(6);
+
+        if(!this.articleList){
+            this.$store.dispatch("fetchArticleList")
+            this.articleList = this.$store.getters.getArticles(6);	
+        }    
     }
 }
 </script>

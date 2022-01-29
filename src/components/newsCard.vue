@@ -1,18 +1,16 @@
 <template>
-<div class="card" :class="{horizontalCard: horizontal}">
-    <img class="card_image" src="https://images.unsplash.com/photo-1593642632559-0c6d3fc62b89?ixlib=rb-1.2.1&ixid=MnwxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1769&q=80" alt="">
+<article class="card" :class="{horizontalCard: horizontal}">
+    <img class="card_image" :src="article.imgURL" alt="article image">
     
     <div class="card_description">    
         <div class="card_info">
             <span class="card_info_date">{{formattedDate}}</span>
-            <span class="card_info_number">14</span>
+            <span class="card_info_number">{{numOfComments}}</span>
         </div>
         
-        <h3 class="card_title">
-            For Obama, MLK's shadow looms large ahead of speech
-        </h3>
+        <h3 class="card_title">{{article.title}}</h3>
     </div>
-</div>
+</article>
 </template>
 
 <script>
@@ -23,13 +21,20 @@ export default {
         horizontal:{
             type: Boolean,
             required: false,
+        },
+        article:{
+            type: Object,
+            required: true,
         }
     },
     computed:{
         formattedDate(){
-            const date = 1642675620987
+            const date = this.article.date * 1000;
             return dayjs(date).format('MMMM DD, YYYY');
-        }
+        },
+        numOfComments(){
+            return this.article.commentIds.length
+        },
     },
 }
 </script>
@@ -37,7 +42,7 @@ export default {
 <style lang="scss" scoped>
 @import "@/styles/main.scss";
 
-div.horizontalCard{
+article.horizontalCard{
     max-width: 100%;
     min-height: auto;
 
@@ -45,6 +50,7 @@ div.horizontalCard{
 
     & > .card_image{
         max-width: 100%;
+        width: 120px;
         max-height: 90px;
 
         margin-right: 16px;
