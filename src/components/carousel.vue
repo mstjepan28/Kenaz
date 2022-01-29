@@ -78,8 +78,15 @@ export default {
     },
     methods: {
         openImage(imgURL=null){
+            if(imgURL) this.moveToImage(imgURL);
+
             imgURL = imgURL? imgURL: this.carouselContent[this.selectedIndex].imgURL;
             this.$emit("openImgModal", imgURL)
+        },
+
+        moveToImage(imgUrl){
+            this.selectedIndex = this.carouselContent.findIndex(item => item.imgURL == imgUrl);
+            this.moveImages();
         },
 
         // Adds/subtracts from the current index and makes sure the index stays in bounds 
