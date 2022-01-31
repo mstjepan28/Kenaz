@@ -9,8 +9,6 @@
 	
 	<Banner />
 </main>
-
-
 </template>
 
 <script>

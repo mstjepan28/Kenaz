@@ -125,7 +125,6 @@ export default {
         // Check if the last/first slide is reached, if it is, turn off the transition and reset the slide
         checkForReset(carousel){
             const maxOffset = (carousel.children.length - 1) * carousel.offsetWidth
-            console.log(maxOffset, Math.abs(this.carouselOffset), this.selectedIndex)
             
             if(Math.abs(this.carouselOffset) == maxOffset){
                 this.selectedIndex = 1;
