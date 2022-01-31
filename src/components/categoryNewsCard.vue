@@ -4,7 +4,7 @@
 
     <div class="categoryNewsCard_info">
         <span class="categoryNewsCard_info_date">
-            <img src="" alt="">{{formattedDate}}
+            <img src="../assets/calendar.png" alt="calendar icon">{{formattedDate}}
         </span>
         <span class="categoryNewsCard_info_author">
             Author: {{author}}
@@ -21,7 +21,7 @@
         <div class="categoryNewsCard_content_text">
             <p>{{shortContent}}</p>
 
-            <button class="readArticle">Read article</button>
+            <router-link :to="`/article/${news.id}`" class="readArticle">Read article</router-link>
         </div>
     </div>
 </article>
@@ -82,9 +82,20 @@ export default {
         @include fontStyle($varelaRound, 12px, normal, 14px, #666666);
 
         display: flex;
+        align-items: center;
         column-gap: 32px;
 
         padding: 16px 0 8px 0;
+
+        & > .categoryNewsCard_info_date{
+            display: flex;
+            align-items: center;
+
+            img{
+                max-width: 16px;
+                margin-right: 4px;
+            }
+        }
     }
 
     & > .categoryNewsCard_content{
@@ -111,8 +122,11 @@ export default {
             & > .readArticle{
                 @include fontStyle($varelaRound, 14px, normal, 16px, white);
 
+                display: inline-block;
+
                 padding: 8px 20px;
                 margin-top: 24px;
+
 
                 background-color: $primary;
             }

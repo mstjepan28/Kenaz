@@ -1,5 +1,5 @@
 <template>
-<div v-if="article" class="secondaryCard">
+<router-link :to="`/article/${article.id}`" v-if="article" class="secondaryCard">
     <div class="secondaryCard_description">
         <div class="secondaryCard_description_info">
             <div class="secondaryCard_description_info_comments">
@@ -8,13 +8,13 @@
             <div class="secondaryCard_description_info_date">{{formattedDate}}</div>
         </div>
 
-        <h3>{{article.title}}</h3>
+        <h3>{{shortTitle}}</h3>
     </div>
 
     <div class="secondaryCard_imgWrapper">
         <img :src="article.imgURL" alt="article img">
     </div>
-</div>
+</router-link>
 </template>
 
 <script>
@@ -35,6 +35,10 @@ export default {
         numOfComments(){
             return this.article.commentIds.length
         },
+        shortTitle(){
+            const res = this.article.title.slice(0, 45);
+            return res.length == this.article.title? res: res + "...";
+        }
     },
 }
 </script>
@@ -85,7 +89,6 @@ export default {
 
     & > .secondaryCard_imgWrapper{
         max-width: 70px;
-        max-height: 70px;
 
         & > img{
             width: 100%;

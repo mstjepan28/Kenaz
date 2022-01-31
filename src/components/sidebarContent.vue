@@ -15,7 +15,7 @@
         <SidebarContentCard 
             :key="article.id" 
             :article="article" 
-            v-for="article in articleList.slice(0, 4)"
+            v-for="article in articleList.slice(0, 5)"
         />
     </div>
 </div>

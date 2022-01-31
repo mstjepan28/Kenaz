@@ -11,12 +11,15 @@
 
 	<Banner/>
 
-	<header>
+	<header v-if="curRoute != 'article'">
 		<Carousel
 			v-if="articleList"
 			:id="'newsCarousel'"
 			:articleList="articleList.slice(0, 7)"
 		/>
+	</header>
+	<header v-else>
+
 	</header>
 
 	<div class="app_content">

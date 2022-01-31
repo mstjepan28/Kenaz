@@ -1,5 +1,5 @@
 <template>
-<article class="card" :class="{horizontalCard: horizontal}">
+<router-link :to="`/article/${article.id}`" class="card" :class="{horizontalCard: horizontal}">
     <img class="card_image" :src="article.imgURL" alt="article image">
     
     <div class="card_description">    
@@ -10,7 +10,7 @@
         
         <h3 class="card_title">{{article.title}}</h3>
     </div>
-</article>
+</router-link>
 </template>
 
 <script>
@@ -42,7 +42,7 @@ export default {
 <style lang="scss" scoped>
 @import "@/styles/main.scss";
 
-article.horizontalCard{
+a.horizontalCard{
     max-width: 100%;
     min-height: auto;
 
@@ -74,6 +74,8 @@ article.horizontalCard{
 .card{
     max-width: 170px;
     min-height: 220px;
+
+    display: block;
 
     & > .card_image{
         max-width: 100%;

@@ -30,7 +30,7 @@
 
         <h1 class="carousel_description_title">{{carouselContent[selectedIndex].title}}</h1>
 
-        <button class="carousel_description_gotoArticle">Read article</button>
+        <router-link :to="`/article/${carouselContent[selectedIndex].id}`" class="carousel_description_gotoArticle">Read article</router-link>
     </div>
 
     <div :id="id" class="carousel_background">
@@ -90,7 +90,7 @@ export default {
         },
 
         // Adds/subtracts from the current index and makes sure the index stays in bounds 
-        changeSlide(direction){
+        changeSlide(direction, disableAnimation=false){
             if(this.isTransitioning) return;
             this.isTransitioning = true
 
@@ -101,7 +101,7 @@ export default {
             else if(this.selectedIndex < 0)
                 this.selectedIndex = this.carouselContent.length - 1
 
-            this.moveImages();
+            this.moveImages(disableAnimation);
 
             setTimeout(() => {
                 this.isTransitioning = false
@@ -109,12 +109,12 @@ export default {
         },
 
         // On button click, change move the carousel
-        moveImages(){
+        moveImages(disableAnimation){
             const carousel = document.getElementById(this.id);
             
             this.carouselOffset = this.selectedIndex * -carousel.offsetWidth;
             
-            carousel.style.transition = "0.75s ease-in-out";
+            carousel.style.transition = disableAnimation? "none": "0.75s ease-in-out";
             carousel.style.transform = `translateX(${this.carouselOffset}px)`;
 
             setTimeout(() => {
@@ -125,6 +125,7 @@ export default {
         // Check if the last/first slide is reached, if it is, turn off the transition and reset the slide
         checkForReset(carousel){
             const maxOffset = (carousel.children.length - 1) * carousel.offsetWidth
+            console.log(maxOffset, Math.abs(this.carouselOffset), this.selectedIndex)
             
             if(Math.abs(this.carouselOffset) == maxOffset){
                 this.selectedIndex = 1;
@@ -149,15 +150,16 @@ export default {
             const lastElem = this.articleList[this.articleList.length - 1];
 
             this.carouselContent = [lastElem, ...this.articleList, firstElem];
-        }
+            
+        },
     },
     mounted(){
         this.cloneElements();
-
+        this.$nextTick(() => this.changeSlide(1, true))
+        //setTimeout(() => , 50); // to set the carousel to a non-cloned slide
+        
         if(this.autoplay){
-            setInterval(() => {
-                this.changeSlide(1);
-            }, 4750);
+            setInterval(() => this.changeSlide(1), 4750);
         }
     },
 }
