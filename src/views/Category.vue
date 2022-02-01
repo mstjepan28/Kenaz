@@ -87,7 +87,7 @@ export default {
 @import "@/styles/main.scss";
 .main{
 	display: flex;
-	column-gap: 16px;
+	justify-content: space-between;
 	
 	& > .main_content{
 		min-width: fit-content;

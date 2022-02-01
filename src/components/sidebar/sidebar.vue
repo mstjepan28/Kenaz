@@ -10,6 +10,10 @@
         <Banner/>
         <Banner/>
     </div>
+
+    <div class="facebookFeed">
+        <img src="@/assets/facebookFeedPlaceholder.png" alt="facebook feed placeholder">
+    </div>
 </aside>
 </template>
 
@@ -45,6 +49,17 @@ export default {
             height: 128px;
 
             margin: 0;
+        }
+    }
+
+    & > .facebookFeed{
+        padding: 16px;
+        margin-top: 16px;
+
+        background-color: white;
+
+        & > img{
+            max-width: 270px;
         }
     }
 }

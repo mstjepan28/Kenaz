@@ -1,5 +1,13 @@
 <template>
 
+<header v-if="article" class="article_header">
+	<div class="article_header_info">
+		<span>{{formattedDate}}</span>
+		<h1>{{article.title}}</h1>
+	</div>
+	<img :src="article.imgURL" alt="article image">
+</header>
+
 <div class="main">
 	<main class="articlePage">
 		<article v-if="article" class="article">
@@ -51,6 +59,8 @@
 </template>
 
 <script>
+import dayjs from "dayjs";
+
 import Banner from "@/components/banner.vue";
 import Comment from "@/components/comment.vue";
 import Sidebar from "@/components/sidebar/sidebar.vue";
@@ -70,6 +80,10 @@ export default {
 		articleId(){
 			return this.$route.params.articleId;
 		},
+        formattedDate(){
+            const date = this.article.date * 1000;
+            return dayjs(date).format('MMMM DD, YYYY');
+        },
 	},
 	methods:{
 		addNewComment(){
@@ -106,9 +120,42 @@ export default {
 <style lang="scss" scoped>
 @import "@/styles/main.scss";
 
+.article_header{
+	max-width: 100%;
+
+	margin-bottom: 8px;
+
+	position: relative;
+
+	& > img{
+		max-width: 100%;
+	}
+
+	& > .article_header_info {
+		width: 100%;
+		min-height: 50px;
+
+		padding: 32px;
+
+		position: absolute;
+		bottom: 0;
+
+		background: rgb(238,238,238);
+		background: linear-gradient(0deg, rgba(238,238,238,1) 15%, rgba(0,0,0,0) 100%);
+
+		& > h1{
+			@include fontStyle($bitter, 44px, bold, 55px, #222222);
+		}
+		& > span{
+			@include fontStyle($varelaRound, 12px, normal, 14px, #222222);
+		}
+	}
+}
+
 .main{
 	display: flex;
-	column-gap: 16px;
+	justify-content: space-between;
+
 	& > .articlePage{
 		max-width: 620px;
 	}
