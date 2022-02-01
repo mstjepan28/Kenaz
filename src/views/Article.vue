@@ -1,55 +1,62 @@
 <template>
-<main class="articlePage">
-	<article v-if="article" class="article">
-		<p>{{article.content.slice(0, 670)}}</p>
-		<img :src="article.imgURL" alt="article image">
-		<p>{{article.content.slice(670)}}</p>
 
-		<img src="../assets/socialMediaPlaceholder.png" alt="social media placeholder">
-	</article>
+<div class="main">
+	<main class="articlePage">
+		<article v-if="article" class="article">
+			<p>{{article.content.slice(0, 670)}}</p>
+			<img :src="article.imgURL" alt="article image">
+			<p>{{article.content.slice(670)}}</p>
 
-	<Banner />
+			<img src="../assets/socialMediaPlaceholder.png" alt="social media placeholder">
+		</article>
 
-	<section v-if="author" class="author">
-		<h2>About the author</h2>
-		
-		<div class="author_info">
-			<div class="author_info_imgWrapper">
-				<img :src="author.imgURL" :alt="author.name">	
+		<Banner />
+
+		<section v-if="author" class="author">
+			<h2>About the author</h2>
+			
+			<div class="author_info">
+				<div class="author_info_imgWrapper">
+					<img :src="author.imgURL" :alt="author.name">	
+				</div>
+				<div class="author_info_aboutMe">
+					<p>{{author.AboutMe}}</p>
+				</div>
 			</div>
-			<div class="author_info_aboutMe">
-				<p>{{author.AboutMe}}</p>
+		</section>
+
+		<section class="comments">
+			<h2>Comments</h2>
+
+			<div v-if="comments" class="comments_commentList">
+				<Comment :key="comment.id" :comment="comment" v-for="comment in comments"/>
 			</div>
-		</div>
-	</section>
+			<div v-else class="comments_noComments">
+				<span>No comments</span>
+			</div>
 
-	<section class="comments">
-		<h2>Comments</h2>
+			<form class="comments_addComment" @submit.prevent="addNewComment()">
+				<h3>Add Your Comment</h3>
+				<input type="text" placeholder="Name" v-model="newComment.user" required>
+				<input type="email" placeholder="Email Address" v-model="newComment.email" required>
+				<textarea placeholder="Comment" v-model="newComment.text" required></textarea>
+				<button type="submit">Submit</button>
+			</form>
+		</section>
+	</main>
 
-		<div v-if="comments" class="comments_commentList">
-			<Comment :key="comment.id" :comment="comment" v-for="comment in comments"/>
-		</div>
-		<div v-else class="comments_noComments">
-			<span>No comments</span>
-		</div>
+	<Sidebar />
+</div>
 
-		<form class="comments_addComment" @submit.prevent="addNewComment()">
-			<h3>Add Your Comment</h3>
-			<input type="text" placeholder="Name" v-model="newComment.user" required>
-			<input type="email" placeholder="Email Address" v-model="newComment.email" required>
-			<textarea placeholder="Comment" v-model="newComment.text" required></textarea>
-			<button type="submit">Submit</button>
-		</form>
-	</section>
-</main>
 </template>
 
 <script>
 import Banner from "@/components/banner.vue";
 import Comment from "@/components/comment.vue";
+import Sidebar from "@/components/sidebar/sidebar.vue";
 
 export default {
-	components: { Banner, Comment },
+	components: { Banner, Comment, Sidebar },
 	data(){
 		return{
 			article: null,
@@ -99,9 +106,14 @@ export default {
 <style lang="scss" scoped>
 @import "@/styles/main.scss";
 
-.articlePage{
-	max-width: 620px;
+.main{
+	display: flex;
+	column-gap: 16px;
+	& > .articlePage{
+		max-width: 620px;
+	}
 }
+
 .article{
 	background-color: white;
 

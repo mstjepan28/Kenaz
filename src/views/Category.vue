@@ -1,18 +1,39 @@
 <template>
-<main v-if="articleList" class="main">
-	<h2 class="categoryTitle">{{curCategory}}</h2>
-	<CategoryNewsCard :key="news.id" :news="news" v-for="news in curPageContent"/>
-	<Pagination :totalPages="totalPages" ref="pagination" @changePage="setPage"/>
-</main>
+<header>
+	<Carousel
+		v-if="articleList"
+		:id="'newsCarousel'"
+		:articleList="articleList.slice(0, 7)"
+	/>
+</header>
+
+<div class="main">
+	<main v-if="articleList" class="main_content">
+		<h2 class="categoryTitle">{{curCategory}}</h2>
+
+		<categoryArticleCard :key="news.id" :news="news" v-for="news in curPageContent"/>
+		<Pagination :totalPages="totalPages" ref="pagination" @changePage="setPage"/>
+
+	</main>
+
+	<Sidebar/>
+</div>
+
+<Banner class="banner_bottom"/>
+
 </template>
 
 <script>
-import CategoryNewsCard from "@/components/categoryNewsCard.vue";
+import Carousel from "@/components/carousel.vue";
+import Banner from "@/components/banner.vue";
+import Sidebar from "@/components/sidebar/sidebar.vue";
+
+import categoryArticleCard from "@/components/cards/categoryArticleCard.vue";
 import Pagination from "@/components/pagination.vue";
 
 export default {
 	name: 'Category',
-	components: { CategoryNewsCard, Pagination },
+	components: { Carousel, Banner, Sidebar, categoryArticleCard, Pagination },
 	
 	data(){
 		return{
@@ -46,6 +67,8 @@ export default {
 		setCategoryContent(){
 			this.page = 1;
 			this.$refs.pagination?.setPage(this.page);
+
+			this.$store.dispatch("fetchArticleList");
 			this.articleList = this.$store.getters.getArticlesByCategory(this.curCategory);	
 		}
 	},
@@ -63,17 +86,25 @@ export default {
 <style lang="scss" scoped>
 @import "@/styles/main.scss";
 .main{
-	min-width: fit-content;
-
 	display: flex;
-	flex-direction: column;
+	column-gap: 16px;
+	
+	& > .main_content{
+		min-width: fit-content;
 
-	background-color: white;
+		display: flex;
+		flex-direction: column;
 
-	& > .categoryTitle{
-		@include fontStyle($bitter, 24px, bold, 28px, #363F48);
-		padding: 16px 0 0 32px;
+		background-color: white;
+
+		& > .categoryTitle{
+			@include fontStyle($bitter, 24px, bold, 28px, #363F48);
+			padding: 16px 0 0 32px;
+		}
 	}
 }
 
+.banner_bottom{
+	max-width: 620px;
+}
 </style>

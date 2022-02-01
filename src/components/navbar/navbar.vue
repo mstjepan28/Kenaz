@@ -32,7 +32,7 @@
 </template>
 
 <script>
-import NavbarCategory from "./navbarCategory.vue";
+import NavbarCategory from "@/components/navbar/navbarCategory.vue";
 
 export default {
     props: {

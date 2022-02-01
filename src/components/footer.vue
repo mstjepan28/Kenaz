@@ -46,7 +46,7 @@
             <div class="featured">
                 <h2>Featured</h2>
                 <div v-if="articleList">
-                    <NewsCard 
+                    <SecondaryCard 
                         :key="article.id" 
                         :article="article" 
                         v-for="article in articleList.slice(0, 3)"
@@ -56,7 +56,7 @@
             <div class="randomPost">
                 <h2>Random Posts</h2>
                 <div v-if="articleList" class="randomPost_container">
-                    <NewsCard 
+                    <SecondaryCard 
                         :key="article.id" 
                         :article="article" 
                         v-for="article in articleList.slice(3, 6)"
@@ -117,10 +117,10 @@
 </template>
 
 <script>
-import NewsCard from "@/components/sidebarContentCard.vue";
+import SecondaryCard from "@/components/cards/secondaryCard.vue";
 
 export default {
-    components: { NewsCard },
+    components: { SecondaryCard },
     data(){
         return{
             tagList: ["Lorem", "ipsum", "dolor", "sit", "amet", "consectetur", "adipisicing", "elit", "Voluptatum", "dolor", "voluptatibus", "beatae", "error"],

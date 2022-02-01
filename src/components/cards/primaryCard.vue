@@ -1,14 +1,14 @@
 <template>
-<router-link :to="`/article/${article.id}`" class="card" :class="{horizontalCard: horizontal}">
-    <img class="card_image" :src="article.imgURL" alt="article image">
+<router-link :to="`/article/${article.id}`" class="primaryCard" :class="{horizontalCard: horizontal}">
+    <img class="primaryCard_image" :src="article.imgURL" alt="article image">
     
-    <div class="card_description">    
-        <div class="card_info">
-            <span class="card_info_date">{{formattedDate}}</span>
-            <span class="card_info_number">{{numOfComments}}</span>
+    <div class="primaryCard_description">    
+        <div class="primaryCard_info">
+            <span class="primaryCard_info_date">{{formattedDate}}</span>
+            <span class="primaryCard_info_number">{{numOfComments}}</span>
         </div>
         
-        <h3 class="card_title">{{article.title}}</h3>
+        <h3 class="primaryCard_title">{{article.title}}</h3>
     </div>
 </router-link>
 </template>
@@ -48,7 +48,7 @@ a.horizontalCard{
 
     display: flex;
 
-    & > .card_image{
+    & > .primaryCard_image{
         max-width: 100%;
         width: 120px;
         max-height: 90px;
@@ -56,34 +56,34 @@ a.horizontalCard{
         margin-right: 16px;
     }
 
-    & > .card_description{
+    & > .primaryCard_description{
         max-width: 130px;
 
-        & > .card_info{
+        & > .primaryCard_info{
             display: flex;
             justify-content: space-between;
     
             margin: 0 0 8px 0;
 
-            & > .card_info_number{
+            & > .primaryCard_info_number{
                 display: none;
             }
         }
     }
 }
-.card{
+.primaryCard{
     max-width: 170px;
     min-height: 220px;
 
     display: block;
 
-    & > .card_image{
+    & > .primaryCard_image{
         max-width: 100%;
         max-height: 128px;
     }
 
-    & > .card_description{
-        & > .card_info{
+    & > .primaryCard_description{
+        & > .primaryCard_info{
             display: flex;
             justify-content: space-between;
     
@@ -94,7 +94,7 @@ a.horizontalCard{
             }
         }
     
-        & > .card_title{
+        & > .primaryCard_title{
             @include fontStyle($bitter, 14px, bold, 18px, initial);
         }
     }

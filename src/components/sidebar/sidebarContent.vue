@@ -12,7 +12,7 @@
         </label>
     </div>
     <div v-if="articleList" class="sidebar_content">
-        <SidebarContentCard 
+        <SecondaryCard 
             :key="article.id" 
             :article="article" 
             v-for="article in articleList.slice(0, 5)"
@@ -22,10 +22,10 @@
 </template>
 
 <script>
-import SidebarContentCard from "./sidebarContentCard.vue";
+import SecondaryCard from "@/components/cards/secondaryCard.vue";
 
 export default {
-    components: { SidebarContentCard },
+    components: { SecondaryCard },
     data(){
         return{
             activeSelection: "popular",

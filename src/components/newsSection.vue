@@ -29,7 +29,7 @@
 </template>
 
 <script>
-import NewsCard from "./newsCard.vue";
+import NewsCard from "@/components/cards/primaryCard.vue";
 export default {
     props: {
         newsCategory:{

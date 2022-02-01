@@ -4,7 +4,7 @@
 
     <div class="categoryNewsCard_info">
         <span class="categoryNewsCard_info_date">
-            <img src="../assets/calendar.png" alt="calendar icon">{{formattedDate}}
+            <img src="@/assets/calendar.png" alt="calendar icon">{{formattedDate}}
         </span>
         <span class="categoryNewsCard_info_author">
             Author: {{author}}

@@ -23,16 +23,10 @@ export default {
     },
     computed:{
         isCurCategory(){
-            const route = this.$route.name;
             const categoryId = this.$route.params.id;
             const curCategory = this.category.category.toLowerCase();
 
-            if(route != "Category" && curCategory == "news")
-                return true;
-            else if(categoryId == curCategory)
-                return true;
-            else
-                return false; 
+            return categoryId == curCategory
         },
         upperCaseCategory(){
             return this.category.category.toUpperCase();
