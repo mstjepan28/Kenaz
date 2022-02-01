@@ -1,7 +1,8 @@
 <template>
 <div class="comment">
     <div class="user_img">
-        <img :src="comment.imgURL" alt="">
+        <img v-if="comment.imgURL" :src="comment.imgURL" alt="user profile picture">
+        <img v-else src="../assets/defaultUserImg.png" alt="default user image">
     </div>
 
     <div class="comment_main">
@@ -42,6 +43,8 @@ export default {
 @import "@/styles/main.scss";
 
 .comment{
+    width: 100%;
+
     display: flex;
     margin-bottom: 48px;
 
@@ -59,15 +62,14 @@ export default {
         }
     }
 
-    & .comment_main{
-        //background-color: blue
-    }
-
     & p{
         @include fontStyle($varelaRound, 13px, normal, 20px, #444444);
 
     }
 
+    & .comment_main{
+        width: 100%;
+    }
     & .comment_info{
         display: flex;
 

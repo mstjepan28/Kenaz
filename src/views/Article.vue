@@ -33,11 +33,11 @@
 			<span>No comments</span>
 		</div>
 
-		<form class="comments_addComment">
+		<form class="comments_addComment" @submit.prevent="addNewComment()">
 			<h3>Add Your Comment</h3>
-			<input type="text" placeholder="Name" v-model="newComment.name">
-			<input type="email" placeholder="Email Address" v-model="newComment.email">
-			<textarea placeholder="Comment" v-model="newComment.comment"></textarea>
+			<input type="text" placeholder="Name" v-model="newComment.user" required>
+			<input type="email" placeholder="Email Address" v-model="newComment.email" required>
+			<textarea placeholder="Comment" v-model="newComment.text" required></textarea>
 			<button type="submit">Submit</button>
 		</form>
 	</section>
@@ -62,9 +62,18 @@ export default {
 	computed:{
 		articleId(){
 			return this.$route.params.articleId;
-		}
+		},
 	},
 	methods:{
+		addNewComment(){
+			this.newComment.id = Date.now();
+			this.newComment.date = Date.now() / 1000;
+
+			if(!this.comments) this.comments = [];
+			this.comments.push(this.newComment);
+
+			this.newComment = {};
+		},
 		setArticleContent(){
 			this.$store.dispatch("fetchArticleList");
 			this.$store.dispatch("fetchAuthorList");
