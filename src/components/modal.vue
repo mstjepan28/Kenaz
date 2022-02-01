@@ -15,6 +15,11 @@ export default {
             required: true,
         }
     },
+    computed:{
+        imgURL(){
+            return this.$store.state.modalControls.modalImgURL;
+        }
+    },
     methods:{
         openWithImg(imgURL){
             let imgElement = document.getElementById(`${this.id}Image`)
@@ -48,6 +53,11 @@ export default {
 
             document.body.style.overflow = "";
         },
+    },
+    watch:{
+        imgURL(){
+            this.openWithImg(this.imgURL);
+        }
     }
 }
 </script>

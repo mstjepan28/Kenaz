@@ -31,7 +31,6 @@
 	:id="'imageCarousel'" 
 	:articleList="articleList.slice(0, 7)" 
 	:imagesOnly="true" 
-	@openImgModal="openImgModal"
 />
 
 </template>
@@ -56,7 +55,7 @@ export default {
 		this.$store.dispatch("fetchArticleList");
 		this.$store.dispatch('fetchCategoryList');
 
-		this.categoryList = this.$store.state.categoryList;
+		this.categoryList = this.$store.state.dataStore.categoryList;
 		this.articleList = this.$store.getters.getArticles(7);
 	}
 }

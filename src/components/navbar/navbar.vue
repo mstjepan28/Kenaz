@@ -1,47 +1,48 @@
 <template>
-    <nav class="navbar">
+<nav v-if="categoryList" class="navbar">
+    <div class="navbar_top_wrapper">
+        <ul class="navbar_top_content">
+            <li>
+                <router-link to="/" class="container_logo">
+                    <span class="logo">
+                        <img src="@\assets\logo_white.png" alt="Kenaz logo">
+                    </span>
+                    <span class="title">Kenaz</span> 
+                </router-link>
+            </li>
 
-        <div class="navbar_top_wrapper">
-            <ul class="navbar_top_content">
-                <li>
-                    <router-link to="/" class="container_logo">
-                        <span class="logo">
-                            <img src="@\assets\logo_white.png" alt="Kenaz logo">
-                        </span>
-                        <span class="title">Kenaz</span> 
-                    </router-link>
-                </li>
+            <li class="break_element">Media</li> 
+            <li>Marketing</li> 
+            <li>Contact</li>
 
-                <li class="break_element">Media</li> 
-                <li>Marketing</li> 
-                <li>Contact</li>
+            <li class="search">
+                <img src="@\assets\search.png" alt="search icon">
+            </li>
+        </ul>
+    </div>
 
-                <li class="search">
-                    <img src="@\assets\search.png" alt="search icon">
-                </li>
-            </ul>
-        </div>
-
-        <div class="navbar_bottom_wrapper">
-            <ul class="navbar_bottom_content">
-                <NavbarCategory :key="category.category" :category="category" v-for="category in categoryList" />
-            </ul>
-        </div>
-
-    </nav>
+    <div class="navbar_bottom_wrapper">
+        <ul class="navbar_bottom_content">
+            <NavbarCategory :key="category.category" :category="category" v-for="category in categoryList" />
+        </ul>
+    </div>
+</nav>
 </template>
 
 <script>
 import NavbarCategory from "@/components/navbar/navbarCategory.vue";
 
 export default {
-    props: {
-        categoryList: {
-            type: Object,
-            required: true
-        },
+    components: { NavbarCategory },
+    data(){
+        return{
+            categoryList: null,
+        }
     },
-    components: { NavbarCategory }
+	mounted(){
+		this.$store.dispatch('fetchCategoryList');
+		this.categoryList = this.$store.state.dataStore.categoryList;
+	}
 }
 </script>
 

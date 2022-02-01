@@ -4,10 +4,7 @@
 		ref="imageModal"
 	/>
 
-	<Navbar
-		v-if="categoryList"
-		:categoryList="categoryList"
-	/>
+	<Navbar/>
 
 	<Banner/>
 
@@ -26,25 +23,6 @@ import Navbar from "@/components/navbar/navbar.vue";
 
 export default {
 	components: { Modal, Navbar, Banner, Footer },
-	data(){
-		return{
-			categoryList: null,
-		}
-	},
-	computed:{
-		curRoute(){
-			return this.$route.name;
-		}
-	},
-	methods:{
-		openImgModal(imgURL){
-			this.$refs.imageModal.openWithImg(imgURL)
-		}
-	},
-	mounted(){
-		this.$store.dispatch('fetchCategoryList');
-		this.categoryList = this.$store.state.categoryList;
-	}
 }
 
 </script>

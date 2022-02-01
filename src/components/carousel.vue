@@ -68,11 +68,13 @@ export default {
 
             carouselOffset: 0,
             isTransitioning: false,
+
+            autoplayInterval: null,
         }
     },
     computed:{
         formattedDate(){
-            const date = this.carouselContent[this.selectedIndex].date
+            const date = this.carouselContent[this.selectedIndex].date * 1000
             return dayjs(date).format('MMMM DD, YYYY');
         }
     },
@@ -81,7 +83,7 @@ export default {
             if(imgURL) this.moveToImage(imgURL);
 
             imgURL = imgURL? imgURL: this.carouselContent[this.selectedIndex].imgURL;
-            this.$emit("openImgModal", imgURL)
+            this.$store.commit("modalControls/setImgURL", imgURL);
         },
 
         moveToImage(imgUrl){
@@ -148,19 +150,31 @@ export default {
             const firstElem = this.articleList[0];
             const lastElem = this.articleList[this.articleList.length - 1];
 
+            // prevents duplicate keys
+            firstElem.id = "firstClone";
+            lastElem.id = "lastClone";
+
             this.carouselContent = [lastElem, ...this.articleList, firstElem];
-            
         },
-    },
-    mounted(){
-        this.cloneElements();
-        this.$nextTick(() => this.changeSlide(1, true))
-        //setTimeout(() => , 50); // to set the carousel to a non-cloned slide
-        
-        if(this.autoplay){
-            setInterval(() => this.changeSlide(1), 4750);
+
+        initCarousel(){
+            this.cloneElements();
+            this.$nextTick(() => this.changeSlide(1, true))
+
+            if(this.autoplay){
+                clearInterval(this.autoplayInterval);
+                this.autoplayInterval = setInterval(() => this.changeSlide(1), 4750);
+            }
         }
     },
+    mounted(){
+        this.initCarousel()
+    },
+    watch:{
+        articleList(){
+            this.initCarousel()
+        }
+    }
 }
 </script>
 
