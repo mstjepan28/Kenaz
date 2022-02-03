@@ -70,6 +70,7 @@ export default {
             isTransitioning: false,
 
             autoplayInterval: null,
+            animationSpeed: 750 //ms
         }
     },
     computed:{
@@ -79,6 +80,8 @@ export default {
         }
     },
     methods: {
+        // Open modal with img, if clicked on current image, find that image URL
+        // set the imgURL to the store where the modal component will reactively activate
         openImage(imgURL=null){
             if(imgURL) this.moveToImage(imgURL);
 
@@ -86,9 +89,24 @@ export default {
             this.$store.commit("modalControls/setImgURL", imgURL);
         },
 
+        // if clicked on the preview image, move carousel to that preview image
+        // if the currently selected image is the same as selected preview or its clone, don't do anything 
         moveToImage(imgUrl){
-            this.selectedIndex = this.carouselContent.findIndex(item => item.imgURL == imgUrl);
+            const imgIndex = this.carouselContent.findIndex(item => item.imgURL == imgUrl);
+            
+            if(this.isSameElement(imgIndex)) return;
+
+            this.selectedIndex = imgIndex;
+            
             this.moveImages();
+        },
+
+        // check if the selected preview image is the same as already selected on or a clone of it 
+        isSameElement(index){
+            const selectedElem = this.carouselContent[index]
+            const curElement = this.carouselContent[this.selectedIndex];
+
+            return selectedElem.id == curElement.id;
         },
 
         // Adds/subtracts from the current index and makes sure the index stays in bounds 
@@ -107,7 +125,7 @@ export default {
 
             setTimeout(() => {
                 this.isTransitioning = false
-            }, 750)
+            }, this.animationSpeed)
         },
 
         // On button click, change move the carousel
@@ -116,12 +134,12 @@ export default {
             
             this.carouselOffset = this.selectedIndex * -carousel.offsetWidth;
             
-            carousel.style.transition = disableAnimation? "none": "0.75s ease-in-out";
+            carousel.style.transition = disableAnimation? "none": `${this.animationSpeed}ms ease-in-out`;
             carousel.style.transform = `translateX(${this.carouselOffset}px)`;
 
             setTimeout(() => {
                 this.checkForReset(carousel)
-            }, 750)
+            }, this.animationSpeed)
         },
 
         // Check if the last/first slide is reached, if it is, turn off the transition and reset the slide
@@ -153,13 +171,14 @@ export default {
             this.carouselContent = [lastElem, ...this.articleList, firstElem];
         },
 
+        // set up the carousel on page load or category change
         initCarousel(){
-            this.cloneElements();
-            this.$nextTick(() => this.changeSlide(1, true))
+            this.cloneElements(); // needed for smooth infinite transitions
+            this.$nextTick(() => this.changeSlide(1, true)) // wait for the page to load
 
             if(this.autoplay){
                 clearInterval(this.autoplayInterval);
-                this.autoplayInterval = setInterval(() => this.changeSlide(1), 4750);
+                this.autoplayInterval = setInterval(() => this.changeSlide(1), this.animationSpeed + 4000);
             }
         }
     },

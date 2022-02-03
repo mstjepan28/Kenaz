@@ -128,12 +128,8 @@ export default {
         }
     },
     mounted(){
-        this.articleList = this.$store.getters.getArticles(6);
-    
-        if(!this.articleList){
-            this.$store.dispatch("fetchArticleList")
-            this.articleList = this.$store.getters.getArticles(6);	
-        }    
+        this.$store.dispatch("fetchArticleList")
+        this.articleList = this.$store.getters.getArticles(6);	   
     }
 }
 

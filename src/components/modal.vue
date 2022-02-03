@@ -21,6 +21,7 @@ export default {
         }
     },
     methods:{
+        // modal is generic so we dynamically create img and append it to the modal body
         openWithImg(imgURL){
             let imgElement = document.getElementById(`${this.id}Image`)
 
@@ -41,12 +42,14 @@ export default {
 
             this.openModal();
         },
+        // called trough this.$ref to open the modal
         openModal(){
             const modal = document.getElementById(this.id);
             modal.style.display = "flex";
 
             document.body.style.overflow = "hidden"; // disable scrolling
         },
+
         closeModal(){
             const modal = document.getElementById(this.id);
             modal.style.display = "none";
@@ -56,6 +59,7 @@ export default {
         },
     },
     watch:{
+        // when store value changes to a non empty string, open the modal and set the string value as img
         imgURL(){
             if(!this.imgURL) return; // if there isn't a URL present don't do anything
             this.openWithImg(this.imgURL);

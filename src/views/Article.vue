@@ -66,6 +66,7 @@ import Comment from "@/components/comment.vue";
 import Sidebar from "@/components/sidebar/sidebar.vue";
 
 export default {
+	name: "Article",
 	components: { Banner, Comment, Sidebar },
 	data(){
 		return{
@@ -86,6 +87,7 @@ export default {
         },
 	},
 	methods:{
+		// add meta info about new comment, append it to the comment list and clear the inputted values
 		addNewComment(){
 			this.newComment.id = Date.now();
 			this.newComment.date = Date.now() / 1000;
@@ -109,6 +111,7 @@ export default {
 		this.setArticleContent();
 	},
 	watch:{
+		// if article changes set its content again
 		articleId(){
 			if(!this.articleId) return;
 			this.setArticleContent();

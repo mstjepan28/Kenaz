@@ -76,6 +76,7 @@ export default {
 		this.setCategoryContent();
 	},
 	watch:{
+		// on category get the new content 
 		curCategory(){
 			this.setCategoryContent();
 		}
