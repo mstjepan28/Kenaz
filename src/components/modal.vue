@@ -45,17 +45,19 @@ export default {
             const modal = document.getElementById(this.id);
             modal.style.display = "flex";
 
-            document.body.style.overflow = "hidden";
+            document.body.style.overflow = "hidden"; // disable scrolling
         },
         closeModal(){
             const modal = document.getElementById(this.id);
             modal.style.display = "none";
 
-            document.body.style.overflow = "";
+            document.body.style.overflow = ""; 
+            this.$store.commit("modalControls/setImgURL", ""); // remove selected imgURL because of reactivity
         },
     },
     watch:{
         imgURL(){
+            if(!this.imgURL) return; // if there isn't a URL present don't do anything
             this.openWithImg(this.imgURL);
         }
     }

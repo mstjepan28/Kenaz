@@ -30,6 +30,7 @@ export default {
         }
     },
     computed:{
+        // create an array from 1 to this.totalPages.length => [1,2,3,4,5,...]
         totalPagesList(){
             return Array.from({length: this.totalPages}, (_, i) => i + 1)
         }
