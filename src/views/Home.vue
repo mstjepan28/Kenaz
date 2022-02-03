@@ -2,21 +2,42 @@
 <header>
 	<Carousel
 		v-if="articleList"
-		:id="'newsCarousel'"
+		:id="'mainCarousel'"
 		:articleList="articleList.slice(0, 7)"
 	/>
 </header>
 
 <div class="main">
 	<main v-if="categoryList" class="main_content">
-		<NewsSection :newsCategory="categoryList[0]" :contentPlacement="'1x3'"/>
-		<NewsSection :newsCategory="categoryList[2]" :contentPlacement="'1x3'"/>
+		<NewsSection :newsCategory="categoryList[0]" contentPlacement="1x3"/>
+		<NewsSection :newsCategory="categoryList[2]" contentPlacement="1x3"/>
 
 		<Banner />
 
-		<NewsSection :newsCategory="categoryList[1]" :contentPlacement="'2x2'"/>
+		<NewsSection :newsCategory="categoryList[1]" contentPlacement="2x2"/>
 		
 		<Banner />
+
+		<NewsSectionCarousel
+			id="newsCarousel"
+			:newsCategory="{category: 'News Carousel', color: '#FCC44D'}" 
+			:articleList="articleList.slice(0, 7)"
+		/>
+
+		<div class="carouselGrouping">
+			<NewsSectionCarousel
+				id="editorials"
+				contentPlacement="1x1"
+				:newsCategory="{category: 'Editorials', color: '#A99765'}" 
+				:articleList="articleList.slice(0, 7)"
+			/>
+			<NewsSectionCarousel
+				id="localNews"
+				contentPlacement="1x1"
+				:newsCategory="{category: 'Local news', color: '#A99765'}" 
+				:articleList="articleList.slice(0, 7)"
+			/>
+		</div>
 	</main>
 
 	<Sidebar/>
@@ -38,12 +59,13 @@
 <script>
 import Carousel from "@/components/carousel.vue";
 import NewsSection from "@/components/newsSection.vue";
+import NewsSectionCarousel from "@/components/newsSectionCarousel.vue";
 import Banner from "@/components/banner.vue";
 import Sidebar from "@/components/sidebar/sidebar.vue";
 
 export default {
 	name: 'Home',
-	components: { Carousel, NewsSection, Banner, Sidebar },
+	components: { Carousel, NewsSection, NewsSectionCarousel, Banner, Sidebar },
 	
 	data(){
 		return{
@@ -76,6 +98,12 @@ export default {
 			&:last-child{
 				margin-bottom: 0px 
 			}
+		}
+
+		& > .carouselGrouping{
+			display: flex;
+			justify-content: space-between;
+
 		}
 	}
 }

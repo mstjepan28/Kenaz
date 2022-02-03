@@ -39,7 +39,7 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 @import "@/styles/main.scss";
 
 a.horizontalCard{
@@ -79,7 +79,6 @@ a.horizontalCard{
 
     & > .primaryCard_image{
         max-width: 100%;
-        max-height: 128px;
     }
 
     & > .primaryCard_description{

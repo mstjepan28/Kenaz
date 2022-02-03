@@ -34,7 +34,7 @@
     </div>
 
     <div :id="id" class="carousel_background">
-        <img :key="slide.id" :src="slide.imgURL" v-for="slide in carouselContent">
+        <img :key="slide.id + Math.random()" :src="slide.imgURL" v-for="slide in carouselContent">
     </div>
 </section>
 </template>
@@ -149,10 +149,6 @@ export default {
         cloneElements(){
             const firstElem = this.articleList[0];
             const lastElem = this.articleList[this.articleList.length - 1];
-
-            // prevents duplicate keys
-            firstElem.id = "firstClone";
-            lastElem.id = "lastClone";
 
             this.carouselContent = [lastElem, ...this.articleList, firstElem];
         },
