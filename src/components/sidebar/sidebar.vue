@@ -2,7 +2,9 @@
 <aside class="content_sidebar">
     <SidebarContent/>
     <SocialMediaSection/>
-    <VideoPlayer :videoLink="'https://www.youtube.com/embed/QhqGCPMfkNM'"/> 
+    <!--
+        <VideoPlayer :videoLink="'https://www.youtube.com/embed/QhqGCPMfkNM'"/> 
+    -->
 
     <div class="bannerContainer">
         <Banner/>

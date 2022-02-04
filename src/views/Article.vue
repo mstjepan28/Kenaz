@@ -37,14 +37,24 @@
 			<h2>Comments</h2>
 
 			<div v-if="comments" class="comments_commentList">
-				<Comment :key="comment.id" :comment="comment" v-for="comment in comments"/>
+				<div :key="comment.id"  v-for="comment in comments">
+					<Comment :comment="comment" @reply="setReplyId"/>
+					<Comment 
+						v-if="comment.replyIds.length" 
+						:key="replyId" 
+						:replyId="replyId" 
+						v-for="replyId in comment.replyIds"
+					/>
+				</div>
 			</div>
 			<div v-else class="comments_noComments">
 				<span>No comments</span>
 			</div>
 
 			<form class="comments_addComment" @submit.prevent="addNewComment()">
-				<h3>Add Your Comment</h3>
+				<h3 v-if="replyingTo">Reply to comment</h3>
+				<h3 v-else>Add Your Comment</h3>
+
 				<input type="text" placeholder="Name" v-model="newComment.user" required>
 				<input type="email" placeholder="Email Address" v-model="newComment.email" required>
 				<textarea placeholder="Comment" v-model="newComment.text" required></textarea>
@@ -73,6 +83,7 @@ export default {
 			article: null,
 			author: null,
 			comments: null,
+			replyingTo: null,
 
 			newComment: {}
 		}
@@ -87,13 +98,28 @@ export default {
         },
 	},
 	methods:{
+		setReplyId(commentId){
+			this.replyingTo = commentId;
+		},
+
 		// add meta info about new comment, append it to the comment list and clear the inputted values
 		addNewComment(){
-			this.newComment.id = Date.now();
+			this.newComment.id = Date.now() + "";
 			this.newComment.date = Date.now() / 1000;
 
-			if(!this.comments) this.comments = [];
-			this.comments.push(this.newComment);
+			if(this.replyingTo){
+				const comment = this.comments.filter(comment => comment.id == this.replyingTo)[0]
+				console.log(comment)
+				comment.replyIds.push(this.newComment.id)
+
+				this.$store.commit("addReply", this.newComment)
+			}
+			else{
+				this.newComment.replyIds = []
+
+				if(!this.comments) this.comments = [];
+				this.comments.push(this.newComment);
+			}
 
 			this.newComment = {};
 		},
@@ -101,11 +127,12 @@ export default {
 			this.$store.dispatch("fetchArticleList");
 			this.$store.dispatch("fetchAuthorList");
 			this.$store.dispatch("fetchCommentList");
+			this.$store.dispatch("fetchReplyList");
 
 			this.article = this.$store.getters.getArticleById(this.articleId);
 			this.author = this.$store.getters.getAuthorById(this.article.authorId);
 			this.comments = this.$store.getters.getCommentsOfArticle(this.article.commentIds);
-		}
+		},
 	},
 	mounted(){
 		this.setArticleContent();
@@ -221,7 +248,7 @@ export default {
 	}
 
 	& > .comments_commentList{
-		margin-top: 44px;
+		margin-top: 20px;
 		margin-bottom: 32px;
 	}
 

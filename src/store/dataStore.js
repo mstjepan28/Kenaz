@@ -7,6 +7,7 @@ export default {
             articleList: null,
             authorList: null,
             commentList: null,
+            replyList: null,
         }
     },
     getters: {
@@ -30,6 +31,13 @@ export default {
             return state.commentList.filter(comment => commentIdList.indexOf(comment.id) != -1)
         },
 
+        getCommentById: (state, getters) => (commentId) => {
+            return state.replyList.filter(comment => comment.id == commentId)[0]
+        },
+
+        getReplyById: (state, getters) => (replyId) => {
+            return state.replyList.filter(reply => reply.id == replyId)[0]
+        },
     },
     mutations: {
         setCategoryList(state, categoryList){
@@ -44,6 +52,13 @@ export default {
         setCommentList(state, commentList){
             state.commentList = commentList;
         },
+        setReplyList(state, replyList){
+            state.replyList = replyList;
+        },
+
+        addReply(state, newReply){
+            state.replyList.push(newReply)
+        }
     },
     actions: {
         fetchCategoryList({ commit }){
@@ -61,6 +76,10 @@ export default {
         fetchCommentList({ commit }){ 
             const commentList = mockData.comments;
             commit('setCommentList', commentList);
+        },
+        fetchReplyList({ commit }){ 
+            const replyList = mockData.replys;
+            commit('setReplyList', replyList);
         },
 
     }
