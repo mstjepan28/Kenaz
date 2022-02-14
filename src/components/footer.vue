@@ -46,7 +46,8 @@
             <div class="featured">
                 <h2>Featured</h2>
                 <div v-if="articleList">
-                    <SecondaryCard 
+                    <SecondaryCard
+                        :oneRowInfo="true"
                         :key="article.id" 
                         :article="article" 
                         v-for="article in articleList.slice(0, 3)"
@@ -56,7 +57,8 @@
             <div class="randomPost">
                 <h2>Random Posts</h2>
                 <div v-if="articleList" class="randomPost_container">
-                    <SecondaryCard 
+                    <SecondaryCard
+                        :oneRowInfo="true"
                         :key="article.id" 
                         :article="article" 
                         v-for="article in articleList.slice(3, 6)"
@@ -148,14 +150,14 @@ export default {
 
     background-color: $secondary;
 
-    & > .footer_topStrip{
+    .footer_topStrip{
         width: 100%;
         height: 24px;
 
         background-color: $primary;
     }
 
-    & > .footer_content{
+    .footer_content{
         width: 100%;
         max-width: $content_width;
 
@@ -164,7 +166,7 @@ export default {
 
         padding: 56px 0 68px 0;
 
-        & > .footer_content_about{
+        .footer_content_about{
             width: 100%;
 
             display: flex;
@@ -174,49 +176,49 @@ export default {
                 width: 33%;
             }
 
-            & h2{
+            h2{
                 @include fontStyle($bitter, 24px, bold, 29px, #CCCCCC);
                 min-height: 52px;
 
                 display: flex;
                 align-items: center
             }
-            & p{
+            p{
                 @include fontStyle($bitter, 14px, normal, 20px, #666666);
                 padding: 24px 0;
             }
 
-            & > .aboutUs{
-
-                & > .title{
+            .aboutUs{
+                .title{
                     display: flex;
 
-                    & > img{
+                    img{
                         width: 28px;
+                        height: 43px;
                     }
 
-                    & > h2{
+                    h2{
                         @include fontStyle($bitter, 30px, normal, 52px, #45B0E3);
                         margin-left: 16px;
                     }
                 }
-                & > .socialMediaIcons{
+                .socialMediaIcons{
                     display: flex;
                     align-items: center;
                     justify-content: space-between;
                     
 
-                    & > img{
+                    img{
                         width: 38px;
                         height: 38px;
                     }
                 }
             }
 
-            & > .newsLetterSignup > form{
+            .newsLetterSignup > form{
                 display: flex;
 
-                & > input{
+                input{
                     @include fontStyle($varelaRound, 16px, normal, 19px, #999999);
                     max-width: 192px;
 
@@ -225,7 +227,7 @@ export default {
                     background-color: #333333;
                 }
 
-                & > button{
+                button{
                     @include fontStyle($varelaRound, 16px, normal, 19px, #999999);
 
                     padding: 16px 20px;
@@ -236,8 +238,8 @@ export default {
                 }
             }
 
-            & > .tags{
-                & > .tags_container{
+            .tags{
+                .tags_container{
                     display: flex;
                     flex-wrap: wrap;
 
@@ -262,7 +264,7 @@ export default {
             }
         }
 
-        & > .footer_content_news{
+        .footer_content_news{
             width: 100%;
 
             display: flex;
@@ -279,18 +281,23 @@ export default {
             }
 
             & .secondaryCard{
+                padding: 22px 0;
                 border-bottom: 1px solid #666666;
+
+                &:last-child{
+                    border-bottom: none
+                }
             }
 
-            & > .twitterFeed{
-                & .tweet{
+            .twitterFeed{
+                .tweet{
                     padding: 20px 0;
 
                     p{
                         @include fontStyle($varelaRound, 13px, normal, 18px, #CCCCCC);
                     }
 
-                    & > .user{
+                    .user{
                         display: flex;
                         align-items: center;
 
@@ -310,7 +317,7 @@ export default {
         }
     }
 
-    & > .footer_misc{
+    .footer_misc{
         width: 100%;
 
         display: flex;
@@ -320,7 +327,7 @@ export default {
     
         border-top: 1px solid #333333;
 
-        & > div{
+        div{
             width: 100%;
             max-width: $content_width;
 

@@ -73,40 +73,40 @@ div.reply{
     display: flex;
     padding: 24px 0;
 
-    & > .user_img{
+    .user_img{
         max-width: 60px;
         height: 60px;
 
         margin-right: 16px;
 
-        & > img{
+        img{
             max-width: 60px;
             aspect-ratio: 1/1;
         }
     }
 
-    & p{
+    p{
         @include fontStyle($varelaRound, 13px, normal, 20px, #444444);
     }
 
-    & .comment_main{
+    .comment_main{
         width: 100%;
     }
-    & .comment_info{
+    .comment_info{
         display: flex;
 
-        & > .comment_info_user{
+        .comment_info_user{
             @include fontStyle($bitter, 18px, normal, 20px, $primary);
             margin-right: 8px;
         }
-        & > .comment_info_date{
+        .comment_info_date{
             @include fontStyle($varelaRound, 11px, normal, initial, #666666);
             
             display: flex;
             align-items: flex-end
         }
 
-        & > .comment_info_replyButton{
+        .comment_info_replyButton{
             @include fontStyle($varelaRound, 14px, normal, 16px, $primary);
             margin-left: auto;
             

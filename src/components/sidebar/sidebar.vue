@@ -2,9 +2,7 @@
 <aside class="content_sidebar">
     <SidebarContent/>
     <SocialMediaSection/>
-    <!--
-        <VideoPlayer :videoLink="'https://www.youtube.com/embed/QhqGCPMfkNM'"/> 
-    -->
+    <VideoPlayer :videoLink="'https://www.youtube.com/embed/QhqGCPMfkNM'"/>
 
     <div class="bannerContainer">
         <Banner/>
@@ -35,7 +33,7 @@ export default {
     width: 100%;
     max-width: 300px;
     
-    & > .bannerContainer{
+    .bannerContainer{
         display: flex;
         justify-content: space-between;
 
@@ -44,7 +42,7 @@ export default {
 
         background-color: $background-darker;
 
-        & > .banner{
+        .banner{
             width: 128px;
             height: 128px;
 
@@ -52,13 +50,13 @@ export default {
         }
     }
 
-    & > .facebookFeed{
+    .facebookFeed{
         padding: 16px;
         margin-top: 16px;
 
         background-color: white;
 
-        & > img{
+        img{
             max-width: 270px;
         }
     }

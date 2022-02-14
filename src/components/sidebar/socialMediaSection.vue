@@ -33,11 +33,11 @@
     margin-top: 16px;
     list-style: none;
 
-    & > li{
+    li{
         display: flex;
         align-items: stretch;
 
-        & > h4{
+        h4{
             @include fontStyle($bitter, 18px, bold, 18px, initial);
             width: 40%;
 
@@ -49,7 +49,7 @@
             background-color: $background-darker;
         }
 
-        & > span{
+        span{
             @include fontStyle($varelaRound, 14px, normal, 17px, white);
 
             display: flex;

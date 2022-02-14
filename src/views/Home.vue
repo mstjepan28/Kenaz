@@ -16,7 +16,7 @@
 
 		<NewsSection :newsCategory="categoryList[1]" contentPlacement="2x2"/>
 		
-		<Banner />
+		<Banner style="margin: 17px 0 27px 0"/>
 
 		<NewsSectionCarousel
 			id="newsCarousel"
@@ -92,7 +92,7 @@ export default {
 	.main_content{
 		min-width: fit-content;
 
-		& > *{
+		*{
 			margin-bottom: 16px;
 
 			&:last-child{
@@ -100,7 +100,7 @@ export default {
 			}
 		}
 
-		& > .carouselGrouping{
+		.carouselGrouping{
 			display: flex;
 			justify-content: space-between;
 

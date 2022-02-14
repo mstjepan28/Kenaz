@@ -8,11 +8,11 @@
 
             <div class="carouse_controls">
                 <button type="button" @click="moveCarousel(-1)">
-                    <img src="@/assets/svg/chevronLeft.svg" alt="left arrow">
+                    <img src="@/assets/svg/chevronLeft.svg" alt="left arrow" :class="{yellowSvg: newsCategory.category == 'News Carousel'}">
                 </button>
 
                 <button type="button" @click="moveCarousel(1)">
-                    <img src="@/assets/svg/chevronRight.svg" alt="right arrow">
+                    <img src="@/assets/svg/chevronRight.svg" alt="right arrow" :class="{yellowSvg: newsCategory.category == 'News Carousel'}">
                 </button>
             </div>
         </div>
@@ -127,7 +127,7 @@ export default {
     },
     mounted(){
         this.offsetWidth = this.contentPlacement? 260: 290; // card width + col gap
-        this.initCarousel()
+        this.initCarousel();
     },
 }
 </script>
@@ -135,38 +135,43 @@ export default {
 <style lang="scss" scoped>
 @import "@/styles/main.scss";
 
+.yellowSvg{
+    filter: brightness(0) saturate(100%) invert(88%) sepia(30%) saturate(1147%) hue-rotate(327deg) brightness(103%) contrast(98%);
+}
+
 section.oneByOne{
     max-width: 300px !important;
 
-    & div.newsSelection_content > a{
+    div.newsSelection_content > a{
         min-width: 230px !important;
     }
 }
 
 .newsSelection{
     max-width: 620px;
+    max-height: 325px;
 
     display: flex;
 
     background-color: white;
 
-    & > .newsSelection_sidebar{
+    .newsSelection_sidebar{
         min-width: 12px;
     }
 
-    & > .newsSelection_main{
+    .newsSelection_main{
         display: flex;
         flex-direction: column;
 
         overflow: hidden;
 
-        & > .newsSelection_main_heading{
+        .newsSelection_main_heading{
             display: flex;
             justify-content: space-between;
 
             padding: 16px 32px 0 32px;
 
-            & > .category_title{
+            .category_title{
                 @include fontStyle($bitter, 24px, bold, 29px, initial);
             }
 
@@ -177,13 +182,13 @@ section.oneByOne{
 
                 padding-top: 12px;
 
-                & > button{
+                button {
                     cursor: pointer;
 
                     border: none;
                     background: none;
 
-                    & > img{
+                    img {
                         width: 16px;
                         height: 22px;
                     }
@@ -192,14 +197,13 @@ section.oneByOne{
             }
         }
 
-
-        & > .newsSelection_content{
+        .newsSelection_content{
             width: 100%;
             display: flex;
             column-gap: 30px;
             margin: 32px 28px;
 
-            & > a{
+            a{
                 min-width: 260px;
             }
         }

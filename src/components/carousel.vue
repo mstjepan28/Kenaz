@@ -25,7 +25,7 @@
     <div v-else class="carousel_description">
         <div class="carousel_description_info">
             <span class="carousel_description_info_date">{{formattedDate}}</span>
-            <span class="carousel_description_info_comments"> <img src="@/assets/commentBubble.png" alt="comment bubble">{{carouselContent[selectedIndex].comments}} Comments</span>
+            <span class="carousel_description_info_comments"> <img src="@/assets/commentBubble.png" alt="comment bubble">{{carouselContent[selectedIndex].commentIds.length}} Comments</span>
         </div>
 
         <h1 class="carousel_description_title">{{carouselContent[selectedIndex].title}}</h1>
@@ -206,7 +206,7 @@ export default {
     position: relative;
     overflow: hidden;
 
-    & > .carousel_controls{
+    .carousel_controls{
         width: 100%;
 
         display: flex;
@@ -220,19 +220,21 @@ export default {
 
         padding: 0 28px;
 
-        & > button{
+        button{
+            padding-bottom: 11px;
+
             cursor: pointer;
             border: none;
             background-color: transparent;
         }
 
-        & > .carousel_controls_open > img{
+        .carousel_controls_open > img{
             max-width: 80px;
             max-height: 80px;
         }
     }
 
-    & > .carousel_description{
+    .carousel_description{
         display: flex;
         flex-direction: column;
 
@@ -242,18 +244,18 @@ export default {
         bottom: 0;
         z-index: 2;
 
-        & > .carousel_description_info{
+        .carousel_description_info{
             display: flex;
             column-gap: 24px;
 
-            & > span{
+            span{
                 @include fontStyle($varelaRound, 12px, normal, 14px, $font_color-gray);
 
                 display: flex;
                 align-items: center;
             }
 
-            & img{
+            img{
                 width: 16px;
                 height: 14px;
 
@@ -261,19 +263,21 @@ export default {
             }
         }
 
-        & > .carousel_description_title{
+        .carousel_description_title{
             @include fontStyle($bitter, 34px, bold, 41px, $font_color-gray);
             max-width: 65%;
 
             margin: 12px 0;
         }
 
-        & > .carousel_description_gotoArticle{
+        .carousel_description_gotoArticle{
             @include fontStyle($varelaRound, 14px, normal, 17px, $font_color-gray);
+            width: 123px;
+            max-height: 33px;
 
             align-self: flex-start;
 
-            padding: 8px 22px;
+            padding: 8px 20px;
 
             cursor: pointer;
 
@@ -282,7 +286,7 @@ export default {
         }
     }
 
-    & > .carousel_preview{
+    .carousel_preview{
         display: flex;
         flex-direction: row;
         column-gap: 10px;
@@ -293,7 +297,7 @@ export default {
         bottom: 0;
         z-index: 2;
 
-        & > .carousel_preview_img{
+        .carousel_preview_img{
             $previewImg-size: 120px;
             width: $previewImg-size;
             height: $previewImg-size;
@@ -302,13 +306,13 @@ export default {
         }
     }
 
-    & > .carousel_background{
+    .carousel_background{
         min-width: 100%;
         height: 100%;
 
         display: flex;
 
-        & > img{
+        img{
             min-width: 100%;
             height: 100%;
         }

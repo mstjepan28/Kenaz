@@ -16,7 +16,7 @@
             <li>Contact</li>
 
             <li class="search">
-                <img src="@\assets\search.png" alt="search icon">
+                <img src="@\assets\svg\searchIcon.svg" alt="search icon">
             </li>
         </ul>
     </div>
@@ -55,6 +55,7 @@ export default {
 
 .navbar_top_wrapper,
 .navbar_bottom_wrapper{
+    max-height: 53px;
     display: flex;
     justify-content: center;
 }
@@ -72,10 +73,10 @@ export default {
 .navbar_top_wrapper{
     background-color: $secondary;
     
-    & > .navbar_top_content{
+    .navbar_top_content{
         display: flex;
 
-        & > li{
+        li{
             @include fontStyle($varelaRound, 14px, normal, 27px, $font_color);
 
             display: flex;
@@ -93,7 +94,7 @@ export default {
             align-self: stretch;
             align-items: center;
             
-            & > .logo{
+            .logo{
                 display: flex;
                 align-self: stretch;
                 align-items: center;
@@ -102,13 +103,13 @@ export default {
 
                 background-color: $secondary-light; 
     
-                & > img{
+                img{
                     width: 14px;
                     height: 21px;
                 }
             }
     
-            & > .title{
+            .title{
                 @include fontStyle($bitter, 24px, normal, 27px, $font_color);
                 align-self: flex-start;
                 padding: 16px 0 0 8px;
@@ -116,14 +117,16 @@ export default {
         }
 
 
-        & > .break_element{
+        .break_element{
             margin-left: auto;
         }
 
-        & > .search{
+        .search{
             max-height: 56px;
 
-            padding: 20px 24px;
+            padding: 20px 23px;
+            margin-left: 28px;
+
             background-color: $secondary-light; 
             
             img{

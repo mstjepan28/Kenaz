@@ -19,7 +19,7 @@
             <img :src="news.imgURL" alt="">
         </div>
         <div class="categoryNewsCard_content_text">
-            <p>{{shortContent}}</p>
+            <p>{{news.content}}</p>
 
             <router-link :to="`/article/${news.id}`" class="readArticle">Read article</router-link>
         </div>
@@ -49,9 +49,6 @@ export default {
         formattedDate(){
             const date = this.news.date * 1000;
             return dayjs(date).format('MMMM DD, YYYY');
-        },
-        shortContent(){
-            return this.news.content.slice(0, 500) + "...";
         }
     },
     mounted(){
@@ -69,27 +66,28 @@ export default {
 .categoryNewsCard{
     width: 100%;
     max-width: 620px;
+    height: 404px;
 
-    padding: 24px 16px 64px 32px;
+    padding: 24px 16px 62px 32px;
 
     border-bottom: 1px solid #DDDDDD;
 
-    & > h2{
+    h2{
         @include fontStyle($bitter, 24px, bold, 24px, #363F48);
     }
 
-    & > .categoryNewsCard_info{
+    .categoryNewsCard_info{
         @include fontStyle($varelaRound, 12px, normal, 14px, #666666);
 
         display: flex;
-        align-items: center;
+        align-items: baseline;
         column-gap: 32px;
 
         padding: 16px 0 8px 0;
 
-        & > .categoryNewsCard_info_date{
+        .categoryNewsCard_info_date{
             display: flex;
-            align-items: center;
+            align-items: baseline;
 
             img{
                 max-width: 16px;
@@ -98,35 +96,46 @@ export default {
         }
     }
 
-    & > .categoryNewsCard_content{
+    .categoryNewsCard_content{
         display: flex;
 
-        & > .categoryNewsCard_content_img{
+        .categoryNewsCard_content_img{
             width: 170px;
             min-width: 170px;
             max-height: 128px;
 
-            & > img{
+            img{
                 width: 100%;
                 height: 100%;
             }
         }
 
-        & > .categoryNewsCard_content_text{
+        .categoryNewsCard_content_text{
+            position: relative;
+            top: -5px;
+
             padding-left: 20px;
 
-            & > p{
+            p{
                 @include fontStyle($bitter, 14px, normal, 22px, #444444);
+                
+                overflow: hidden;
+                text-overflow: ellipsis;
+
+                display: -webkit-box;
+                -webkit-line-clamp: 8; 
+                -webkit-box-orient: vertical;
             }
 
-            & > .readArticle{
+            .readArticle{
                 @include fontStyle($varelaRound, 14px, normal, 16px, white);
+                width: fit-content;
 
-                display: inline-block;
+                display: flex;
+                align-items: center;
 
                 padding: 8px 20px;
                 margin-top: 24px;
-
 
                 background-color: $primary;
             }

@@ -1,7 +1,11 @@
 <template>
   	<div :id="id" class="modal_background" @click="closeModal()">
         <div class="modal" @click.stop>
-            <div class="modal_body"></div>
+            <div class="modal_body">
+                <button class="modal_body_closeBtn" @click="closeModal()">
+                    <img src="@/assets/svg/closeIcon.svg" alt="close modal button">
+                </button>
+            </div>
         </div>
     </div>
 </template>
@@ -100,6 +104,29 @@ $modal_animation-speed: 0.4s;
     background: white;
 
     animation: scaleUp $modal_animation-speed linear;
+
+    .modal_body{
+        position: relative;
+    }
+
+    .modal_body_closeBtn{
+        position: absolute;
+        top: 0;
+        right: 0;
+
+        cursor: pointer;
+
+        padding: 16px;
+
+        border: none;
+        background: none;
+
+        img{
+            $closeBtnSize: 24px;
+            width: $closeBtnSize;
+            height: $closeBtnSize;
+        }
+    }
 
     .modal_showImg{
         max-width: 1040px;

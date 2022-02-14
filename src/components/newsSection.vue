@@ -64,43 +64,47 @@ export default {
 
 .newsSelection{
     max-width: 620px;
+    max-height: 325px;
 
     display: flex;
 
     background-color: white;
 
-    & > .newsSelection_sidebar{
+    .newsSelection_sidebar{
         width: 12px;
     }
 
-    & > .newsSelection_main{
+    .newsSelection_main{
         display: flex;
         flex-direction: column;
 
-        & > .newsSelection_main_heading{
+        .newsSelection_main_heading{
             display: flex;
             justify-content: space-between;
 
             padding: 16px 32px 0 32px;
 
-            & > .category_title{
+            .category_title{
                 @include fontStyle($bitter, 24px, bold, 29px, initial);
             }
 
-            & > .seeAll_link{
+            .seeAll_link{
                 @include fontStyle($varelaRound, 14px, normal, 17px, $font_color-blue);
+                max-height: 19px;
                 text-align: right;
+                
+                border-bottom: 1px solid rgba($font_color-blue, 0.3);
             }
         }
 
-        & > .newsSelection_content{
+        .newsSelection_content{
 
             display: flex;
             column-gap: 20px;
             margin: 32px 28px;
         }
 
-        & > .twoByTwo > div{
+        .twoByTwo > div{
             display: flex;
             flex-direction: column;
             row-gap: 32px;

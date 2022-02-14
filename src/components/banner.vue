@@ -26,7 +26,7 @@ export default {
 .banner{
     width: 100%;
     max-width: $content_width;
-    height: 120px;
+    height: 123px;
 
     display: flex;
     justify-content: center;

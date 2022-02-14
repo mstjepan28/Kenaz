@@ -15,7 +15,7 @@
 			<img :src="article.imgURL" alt="article image">
 			<p>{{article.content.slice(670)}}</p>
 
-			<img src="../assets/socialMediaPlaceholder.png" alt="social media placeholder">
+			<img class="placeholderImg" src="../assets/socialMediaPlaceholder.png" alt="social media placeholder">
 		</article>
 
 		<Banner />
@@ -55,10 +55,20 @@
 				<h3 v-if="replyingTo">Reply to comment</h3>
 				<h3 v-else>Add Your Comment</h3>
 
+				<p>
+					Molestias ultricies, ante quam urna ut volutpat, egestas dolor dui, nec hac ultrices nulla non netus. 
+					Placerat vehicula donec non suscipit egestas, augue vel suspendisse. Et felis venenatis blandit sed 
+					est ultrices, adipiscing urna.
+				</p>
+
 				<input type="text" placeholder="Name" v-model="newComment.user" required>
 				<input type="email" placeholder="Email Address" v-model="newComment.email" required>
 				<textarea placeholder="Comment" v-model="newComment.text" required></textarea>
-				<button type="submit">Submit</button>
+
+				<div>
+					<button type="submit">Submit</button>
+					<button v-if="replyingTo" type="button" @click="cancelReply()">Cancel</button>
+				</div>
 			</form>
 		</section>
 	</main>
@@ -98,6 +108,10 @@ export default {
         },
 	},
 	methods:{
+		cancelReply(){
+			this.replyingTo = null;
+		},
+
 		setReplyId(commentId){
 			this.replyingTo = commentId;
 		},
@@ -157,11 +171,11 @@ export default {
 
 	position: relative;
 
-	& > img{
+	img{
 		max-width: 100%;
 	}
 
-	& > .article_header_info {
+	.article_header_info {
 		width: 100%;
 		min-height: 50px;
 
@@ -173,11 +187,13 @@ export default {
 		background: rgb(238,238,238);
 		background: linear-gradient(0deg, rgba(238,238,238,1) 15%, rgba(0,0,0,0) 100%);
 
-		& > h1{
+		h1{
 			@include fontStyle($bitter, 44px, bold, 55px, #222222);
 		}
-		& > span{
+		span{
 			@include fontStyle($varelaRound, 12px, normal, 14px, #222222);
+			display: block;
+			margin-bottom: 16px;
 		}
 	}
 }
@@ -186,7 +202,7 @@ export default {
 	display: flex;
 	justify-content: space-between;
 
-	& > .articlePage{
+	.articlePage{
 		max-width: 620px;
 	}
 }
@@ -199,10 +215,11 @@ export default {
 
 		&:last-of-type{
 			margin-bottom: 20px;
+			padding-left: 16px;
 		}
 	}
 
-	& > p{
+	p{
 		@include fontStyle($bitter, 14px, normal, 22px, #444444);
 		padding: 36px 20px 40px 30px;
 	}
@@ -226,12 +243,12 @@ export default {
 
 		margin-top: 28px;
 
-		& img{
+		img {
 			max-width: 110px;
 			aspect-ratio: 1/1;
 		}
 
-		p{
+		p {
 			@include fontStyle($varelaRound, 13px, normal, 22px, #444444);
 		}
 	}
@@ -243,16 +260,16 @@ export default {
 
 	background-color: white;
 
-	& h2, h3{
+	h2, h3{
 		@include fontStyle($bitter, 24px, bold, 28px, #363F48);
 	}
 
-	& > .comments_commentList{
+	.comments_commentList{
 		margin-top: 20px;
 		margin-bottom: 32px;
 	}
 
-	& > .comments_noComments{
+	.comments_noComments{
 		min-height: 120px;
 
 		display: flex;
@@ -265,27 +282,28 @@ export default {
 		border: 1px solid black;
 	}
 
-	& > .comments_addComment{
+	.comments_addComment{
 		display: flex;
 		flex-direction: column;
 
-		& > h3{
-			margin-bottom: 16px;
+		p {
+			@include fontStyle($varelaRound, 13px, normal, 20px, #444444);
+			margin: 16px 0 26px 0;
 		}
 
-		& > input{
+		input {
 			@include fontStyle($varelaRound, 14px, normal, 14px, #666666);
 
 			width: 300px;
 
-			padding: 12px 0px 16px 20px;
+			padding: 12px 0px 12px 20px;
 			margin-bottom: 8px;
 
 			border: none;
 			background-color: #DDDDDD;
 		}
 
-		& > textArea{
+		textArea {
 			@include fontStyle($varelaRound, 14px, normal, 14px, #666666);
 
 			min-width: 100%;
@@ -299,14 +317,17 @@ export default {
 			background-color: #DDDDDD;
 		}
 
-		& > button{
+		button {
 			@include fontStyle($varelaRound, 14px, normal, 16px, #FFFFFF);
 
 			width: fit-content;
 			min-width: 150px;
 
+			cursor: pointer;
+
 			padding: 16px 36px;
-			margin-top: 32px;
+			margin-top: 16px;
+			margin-right: 16px;
 
 			text-align: center;
 

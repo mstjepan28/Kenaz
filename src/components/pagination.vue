@@ -57,7 +57,7 @@ export default {
     padding: 32px;
     margin-top: auto;
 
-    & > .pagination_pageNum{
+    .pagination_pageNum{
         @include fontStyle($varelaRound, 14px, normal, 17px, $primary);
 
         padding: 8px 12px;

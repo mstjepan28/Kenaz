@@ -46,22 +46,25 @@ export default {
 <style lang="scss" scoped>
 @import "@/styles/main.scss";
 
-.activeType{
+label.activeType{
     color: $highlight-yellow !important;
+    border-bottom: 1px solid rgba($highlight-yellow, 0.3) !important;
 }
 .sidebar{
     width: 100%;
+    //min-height: 675px;
 
     display: flex;
     flex-direction: column;
 
-    padding-bottom: 40px;
+    padding-bottom: 43px;
     margin-bottom: 28px;
 
     background: $primary;
     
-    & > .sidebar_controls{
+    .sidebar_controls{
         width: 100%;
+        min-height: 53px;
 
         display: flex;
         justify-content: space-between;
@@ -70,7 +73,7 @@ export default {
 
         background-color: $primary-darker;
 
-        & > label{
+        label{
             @include fontStyle($varelaRound, 14px, normal, 17px, white);
 
             cursor: pointer;
@@ -79,11 +82,17 @@ export default {
             justify-content: center;
             align-items: center;
 
-            text-decoration: underline;
+            border-bottom: 1px solid rgba(#ACB3BA, 0.3);
 
             &>input{
                 display: none !important;
             }
+        }
+    }
+
+    .sidebar_content{
+        & a {
+            max-height: 114px
         }
     }
 }

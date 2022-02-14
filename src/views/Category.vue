@@ -90,7 +90,7 @@ export default {
 	display: flex;
 	justify-content: space-between;
 	
-	& > .main_content{
+	.main_content{
 		min-width: fit-content;
 
 		display: flex;
@@ -98,7 +98,7 @@ export default {
 
 		background-color: white;
 
-		& > .categoryTitle{
+		.categoryTitle{
 			@include fontStyle($bitter, 24px, bold, 28px, #363F48);
 			padding: 16px 0 0 32px;
 		}

@@ -1,5 +1,5 @@
 <template>
-<div>
+<div class="kenazTV">
     <div class="title">
         <h2>Kenaz TV</h2>
     </div>
@@ -42,26 +42,29 @@ export default {
 <style lang="scss" scoped>
 @import "@/styles/main.scss";
 
+.kenazTV{
+    min-height: 324px;;
+    background: white;
+}
+
 .title{
     padding: 16px 32px 32px 32px;
     margin-top: 20px;
 
     background-color: white;
 
-    & > h2{
+    h2{
         @include fontStyle($bitter, 24px, bold, 29px, #363F48);
     }
 }
 
 .video_description{
     padding: 16px 32px 24px 32px;
-    background-color: white;
-    & > .video_date{
+    .video_date{
         @include fontStyle($varelaRound, 12px, normal, 14px, #666666);
-
     }
 
-    & > .video_title{
+    .video_title{
         @include fontStyle($bitter, 14px, bold, 18px, #363F48);
     }
 

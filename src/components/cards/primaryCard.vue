@@ -48,7 +48,7 @@ a.horizontalCard{
 
     display: flex;
 
-    & > .primaryCard_image{
+    .primaryCard_image{
         max-width: 100%;
         width: 120px;
         max-height: 90px;
@@ -56,16 +56,16 @@ a.horizontalCard{
         margin-right: 16px;
     }
 
-    & > .primaryCard_description{
+    .primaryCard_description{
         max-width: 130px;
 
-        & > .primaryCard_info{
+        .primaryCard_info{
             display: flex;
             justify-content: space-between;
     
             margin: 0 0 8px 0;
 
-            & > .primaryCard_info_number{
+            .primaryCard_info_number{
                 display: none;
             }
         }
@@ -75,26 +75,28 @@ a.horizontalCard{
     max-width: 170px;
     min-height: 220px;
 
+
     display: block;
 
-    & > .primaryCard_image{
-        max-width: 100%;
+    .primaryCard_image{
+        width: 100%;
+        max-height: 150px;
     }
 
-    & > .primaryCard_description{
-        & > .primaryCard_info{
+    .primaryCard_description{
+        .primaryCard_info{
             display: flex;
             justify-content: space-between;
     
             margin: 8px 0;
     
-            & > *{
-                @include fontStyle($varelaRound, 12px, normal, 14px, initial);
+            *{
+                @include fontStyle($varelaRound, 12px, normal, 14px, #666666);
             }
         }
     
-        & > .primaryCard_title{
-            @include fontStyle($bitter, 14px, bold, 18px, initial);
+        .primaryCard_title{
+            @include fontStyle($bitter, 14px, bold, 18px, #363F48);
         }
     }
 
